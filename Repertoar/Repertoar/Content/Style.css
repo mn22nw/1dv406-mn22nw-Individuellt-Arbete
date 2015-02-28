@@ -1,0 +1,191 @@
+﻿body {
+    background-color:gray;
+    margin:0 auto;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    padding: 0;
+}
+#page {
+    width: 80%;
+    margin:0 auto;
+    background:#FFF;
+    padding:15px 20px;
+    height:900px;
+    height:auto !important;
+    min-height:900px;
+}
+    /* SongDetails
+-----------------------------------------------------------*/
+#detailsUL {
+    display:block;
+    padding:10px;
+    list-style-type:none;
+}
+#detailsUL h3, #kompositör h3 {
+    display:inline;
+    padding:10px;
+    line-height:50px;
+ 
+}
+#kompositör { 
+    color:#FFF;
+    background:#000;
+}
+#anteckningar {
+    width:50%;
+    min-width:300px;
+    padding:0 10px 25px 15px;
+    border-left:1px solid #000;
+    float:right;
+    margin-bottom:15px;
+    margin-right:10px;
+    min-height:245px;       
+    max-height:100%;
+}
+#AllDetailsContainer {
+    border:1px solid #000;
+    height:auto !important;
+    min-height:320px;  
+
+    
+}
+
+
+*:focus {
+    outline: 0;
+}
+
+
+
+/* Listing.aspx
+-----------------------------------------------------------*/
+#tableContacts {
+    width:900px;
+}
+
+#tableContacts tr{
+    width:250px;
+    padding:25px;
+    
+}
+#allContactsTable th, .HeaderTb{
+    text-align:left;
+    padding-left:15px;
+}
+.HeaderTb tr{
+    color:#FFF;
+    padding:20px 0;
+    display:block;
+}
+.HeaderTb {
+    border-collapse:collapse;
+    width:100%; 
+}
+
+.HeaderTb th{
+     padding-left:15px;
+    width:110px;
+    height:50px;
+    background:#000;
+}
+#instrument {
+    width:110px;
+    min-width:110px;
+}
+
+.Name {
+    max-width:90%;
+    width:600px;
+    padding-right:10px;
+    text-align:left;
+}
+.lastName {
+    width:200px;
+}
+.emailTb {
+    width:450px;    
+}
+.zebra_stripe tbody tr:nth-child(even) td, .zebra_stripe tbody tr.even td {
+    background:#e5ecf9;
+}
+/****       KNAPPAR         ****
+   ------------------------****/
+.button , .buttonBack {
+    display:inline-block;
+    padding:15px;
+    background:#e5ecf9;
+    min-width:70px;
+    margin:10px 0;
+    line-height:15px;
+    margin-top:15px;
+    text-decoration:none;
+    margin-bottom:20px;
+    color:#000;
+    font-weight:900;
+    text-align:center;
+    border:1px solid #000;
+    border-radius:5px;
+    font-size:.8em;
+}
+    .button:visited {
+        color:#000;
+    }
+.buttonBack {
+    padding:5px 15px;
+    color:#FFF;
+    background:#000;
+}
+.right {
+    float:right;
+    background:#ff9900;
+}
+
+
+    /* Message styles
+-----------------------------------------------------------*/
+.icon-ok
+{
+    border: solid 1px #90ac13;
+    background: #eef4d3;
+    color: #6b800d;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: middle;
+    min-height: 42px;
+    padding: 10px;
+    line-height: 42px;
+    vertical-align: middle;
+    margin-bottom:.5em;
+}
+.exit {
+    float:right;
+    width:70px;
+    height:30px;
+    font-size:.8em;
+    background:#000;
+    color:#FFF;
+    cursor:pointer;
+}
+
+#AllContent {
+    margin:0 auto;
+    width:900px;
+    max-width:95%;
+    padding:10px;
+    
+}
+
+.validation-summary-errors {
+     font-weight: bold;
+    border: 2px solid gray;
+    padding: 20px;
+    max-width:400px;
+    max-width:100%;
+    min-height: 15px;
+    margin-top: 15px;
+    margin-bottom:15px;
+}
+.error {
+    color:red;
+}
+
+

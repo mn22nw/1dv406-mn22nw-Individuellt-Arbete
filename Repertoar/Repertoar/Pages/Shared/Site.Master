@@ -1,0 +1,25 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Repertoar.Pages.Shared.Site" ViewStateMode="Disabled" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Repertoar</title>
+    <link href="~/Content/Style.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div id="page">
+        <div id="AllContent">
+             <form id="form1" runat="server">
+             
+            <asp:ContentPlaceHolder ID="MainContentPlaceHolder" runat="server" />
+                 </form>
+            </div>
+        </div>
+    <asp:ContentPlaceHolder ID="ScriptContentPlaceHolder" runat="server" />
+        </body>
+
+</html>
