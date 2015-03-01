@@ -136,8 +136,9 @@
              <asp:TextBox ID="TextBox2" runat="server" MaxLength="1500" Text='<%# BindItem.Anteckning %>' TextMode="MultiLine" ></asp:TextBox>
             </div>
  
-        <asp:Button ID="SaveButton" runat="server" Text="Spara" CommandName="Update" CssClass="button"/>
-
+        <asp:Button ID="SaveButton" runat="server" Text="Spara" CommandName="Update" CssClass="button save"/>
+              <asp:HyperLink ID="HyperLink1" runat="server" Text="Avbryt" 
+                            NavigateUrl='<%# GetRouteUrl("Details", new { id= Item.MID}) %>' CssClass="button" />
             </EditItemTemplate>
            
 

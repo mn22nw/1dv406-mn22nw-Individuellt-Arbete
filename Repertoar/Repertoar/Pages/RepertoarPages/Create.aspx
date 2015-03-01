@@ -134,8 +134,12 @@
              <asp:TextBox ID="TextBox2" runat="server" MaxLength="1500" Text='<%# BindItem.Anteckning %>' TextMode="MultiLine" ></asp:TextBox>
             </div>
  
-        <asp:Button ID="SaveButton" runat="server" Text="Lägg till" CommandName="Insert" CssClass="button"/>
+      <asp:Button ID="SaveButton" runat="server" Text="Lägg till" CommandName="Insert" CssClass="button"/>
+        <br />
+        <asp:HyperLink ID="HyperLink2" runat="server" Text="Tillbaka" 
+                           NavigateUrl="<%$ RouteUrl:routename=Default %>" CssClass="buttonBack" />
        </InsertItemTemplate>
+      
       </asp:FormView>
 </asp:Content>
 

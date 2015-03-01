@@ -7,7 +7,7 @@
         ItemType="Repertoar.MODEL.Material"
         DataKeyNames="MID, KaID, KompID"
         SelectMethod="MaterialListView_GetItem"
-        DeleteMethod="MaterialtListView_DeleteItem"
+        DeleteMethod="MaterialtListView_DeleteSong"
         OnItemDataBound="MaterialListView_ItemDataBound">
         <LayoutTemplate>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" HeaderText="Följande fel inträffade:"
@@ -66,13 +66,13 @@
             </div>
              <%-- Redigera, delete + tillbakaknapp. --%>
              <asp:HyperLink ID="HyperLink1" runat="server" Text="Redigera" 
-                            NavigateUrl='<%# GetRouteUrl("EditSong", new { id= Item.MID}) %>' CssClass="button smaller" />
+                            NavigateUrl='<%# GetRouteUrl("EditSong", new { id= Item.MID}) %>' CssClass="button" />
                        
-             <asp:LinkButton ID="LinkButton1"  runat="server" CommandName="Delete" Text="Radera"  CssClass="button smaller"
+             <asp:LinkButton ID="LinkButton1"  runat="server" CommandName="Delete" Text="Radera"  CssClass="button "
                              OnClientClick='<%# String.Format("return confirm(\"Ta bort låten {0}?\")", Item.Namn) %>'/>  
             <br />
              <asp:HyperLink ID="HyperLink2" runat="server" Text="Tillbaka" 
-                           NavigateUrl="<%$ RouteUrl:routename=Default %>" CssClass="buttonBack smaller" />
+                           NavigateUrl="<%$ RouteUrl:routename=Default %>" CssClass="buttonBack" />
              </ItemTemplate>                 
     </asp:ListView>
 

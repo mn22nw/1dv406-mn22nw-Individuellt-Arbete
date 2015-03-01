@@ -10,7 +10,7 @@
     margin:0 auto;
     background:#FFF;
     padding:15px 20px;
-    min-height:900px;
+    min-height:1000px;
     height:100%;
     height:auto !important;
 }
@@ -117,38 +117,62 @@ select {
 
 /* Listing.aspx
 -----------------------------------------------------------*/
-#tableContacts {
-    width:900px;
-}
-
-#tableContacts tr{
-    width:250px;
-    padding:25px;
-    
-}
-#allContactsTable th, .HeaderTb{
-    text-align:left;
-    padding-left:15px;
-}
-.HeaderTb tr{
-    color:#FFF;
-    padding:20px 0;
+#allContactsTable a {
     display:block;
+    width:100%;
+    font-weight:600;
+    color:#000;
+    height:80px;
+    line-height:80px;
 }
-.HeaderTb {
+#allContactsTable a:visited {
+    color:#000;
+}
+#allContactsTable tr:nth-child(even) {
+    background:#DAE4F0;
+}
+#allContactsTable tr:first-child {
+     border-left:0;
+     border-bottom:2px solid #000;
+}
+#allContactsTable {
+    width:900px;
     border-collapse:collapse;
     width:100%; 
+    border-bottom:2px solid #000;
+}
+#allContactsTable th {
+    height:80px; 
+    text-align:left;
+    line-height:80px;
+    
+}
+.titleRepertoar {
+    float:left;
+    width:200px;
+    height:40px;
+    font-size:4.1em;
+    line-height:40px;
+    font-weight:500;
+    padding-top:10px;
+}
+#allContactsTable tr{
+    width:250px;
+    padding:25px;
+    height:80px;
+    border-left:2px solid #000;
+}
+#allContactsTable td, .HeaderTb{
+    text-align:left;
+    padding-left:15px;
+    
 }
 
-.HeaderTb th{
-     padding-left:15px;
-    width:110px;
-    height:50px;
-    background:#000;
-}
 #instrument {
     width:110px;
     min-width:110px;
+    background:#000;
+    color:#FFF;
 }
 
 .Name {
@@ -157,15 +181,8 @@ select {
     padding-right:10px;
     text-align:left;
 }
-.lastName {
-    width:200px;
-}
-.emailTb {
-    width:450px;    
-}
-.zebra_stripe tbody tr:nth-child(even) td, .zebra_stripe tbody tr.even td {
-    background:#e5ecf9;
-}
+
+
 /****       KNAPPAR         ****
    ------------------------****/
 .button , .buttonBack {
@@ -184,18 +201,32 @@ select {
     border:1px solid #000;
     border-radius:5px;
     font-size:.8em;
+    cursor:pointer;
 }
     .button:visited {
         color:#000;
     }
+.save {
+ background:#ff9900;
+ width:150px;
+ 
+}
 .buttonBack {
     padding:5px 15px;
     color:#FFF;
     background:#000;
 }
+hr { 
+    clear:both;
+}
 .right {
+    width:110px;
+    height:40px;
+    line-height:40px;
     float:right;
     background:#ff9900;
+    font-size:0.9em;
+    margin:0 0 15px 0;
 }
 
 

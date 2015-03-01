@@ -32,22 +32,5 @@ namespace Repertoar.Pages.RepertoarPages
         {
             return Service.GetSongs();
         }
-
-        // The id parameter name should match the DataKeyNames value set on the control
-        public void ContactListView_DeleteSong(int MID)
-        {
-            try
-            {
-                Service.DeleteSong(MID);
-                Page.SetTempData("SuccessMessage", "Låten togs bort.");
-                Response.RedirectToRoute("ContactListing");
-                Context.ApplicationInstance.CompleteRequest();
-            }
-            catch (Exception)
-            {
-                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade när kontaktuppgiften skulle tas bort");
-            }
-        }
-
     }
 }

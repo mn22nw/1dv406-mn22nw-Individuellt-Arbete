@@ -31,7 +31,6 @@ namespace Repertoar.Pages.RepertoarPages
         {
             DropDownList ddlComposer = (DropDownList)SongFormView.Row.FindControl("ddlComposer");
             ddlComposer.Items.Insert(0, new ListItem("-- Välj Kompositör --", string.Empty));
-            ddlComposer.SelectedIndex = 0;
         }
 
 
@@ -58,9 +57,7 @@ namespace Repertoar.Pages.RepertoarPages
  
             }
 
-            if (KompID > 0)
-            {
-
+           
                 if (String.IsNullOrWhiteSpace(material.Anteckning))
                 {
                     material.Anteckning = "Klicka på redigera för att lägga till en anteckning. ";
@@ -73,7 +70,6 @@ namespace Repertoar.Pages.RepertoarPages
                 Page.SetTempData("SuccessMessage", Strings.Action_Song_Saved);
                 Response.RedirectToRoute("Details", new { id = material.MID });
                 Context.ApplicationInstance.CompleteRequest();
-            }
         }
 
 

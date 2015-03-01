@@ -95,8 +95,9 @@ namespace Repertoar.Pages.RepertoarPages
                 Page.ModelState.AddModelError(String.Empty, Strings.Song_Updating_Error);
             }
         }
+        // The id parameter name should match the DataKeyNames value set on the control
 
-        public void MaterialtListView_DeleteItem(int MID)
+        public void MaterialtListView_DeleteSong(int MID)
         {
             try
             {
