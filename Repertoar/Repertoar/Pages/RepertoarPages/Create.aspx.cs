@@ -29,16 +29,33 @@ namespace Repertoar.Pages.RepertoarPages
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            DropDownList ddlComposer = (DropDownList)SongFormView.Row.FindControl("ddlComposer");
+            ddlComposer.Items.Insert(0, new ListItem("-- Välj Kompositör --", string.Empty));
+            ddlComposer.SelectedIndex = 0;
         }
 
 
         public void MaterialFormView_InsertSong(Material material)
         {
-                    
+            string kompNamn = "";
+           
+            
+            //Om KompId är 0 så har användaren inte valt en kompositör från listan och vill därför lägga till en ny kompositör
             if (KompID == 0)
-            {
-                SuccessMessagePanel.Visible = true;
-                SuccessMessageLiteral.Text = "En kompositör måste väjas";
+            {   
+                TextBox kompText =(TextBox)SongFormView.Row.FindControl("KompNamn");
+
+                if (String.IsNullOrWhiteSpace(kompText.ToString()))
+                {
+                    //Om kompNamn är tomt så har användaren antingen glömt välja kompositör ur dropdownlistan eller lämnat textfältet tomt
+                    SuccessMessageLiteral.Text = "En kompositör måste väjas ur listan eller läggas till";
+                    SuccessMessagePanel.Visible = true;
+                }
+                else
+                {
+                    kompNamn = kompText.ToString();
+                }
+ 
             }
 
             if (KompID > 0)
@@ -49,9 +66,9 @@ namespace Repertoar.Pages.RepertoarPages
                     material.Anteckning = "Klicka på redigera för att lägga till en anteckning. ";
                 }
 
-                string KompNamn = "Kompnamn";
+                
 
-                material.MID = Service.SaveSong(material, KompNamn);
+                material.MID = Service.SaveSong(material, kompNamn);
 
                 Page.SetTempData("SuccessMessage", Strings.Action_Song_Saved);
                 Response.RedirectToRoute("Details", new { id = material.MID });
@@ -76,44 +93,10 @@ namespace Repertoar.Pages.RepertoarPages
         }
 
 
-
-        protected void ddlComposers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //när index ändras ska det skickas somehow till insertitem...
-            //  Debug.WriteLine(Composer + " indexch");
-            //Composer = ddlComposers.SelectedValue;
-
-        }
-
-        protected void rblKategori_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //kod här
-        }
-
-
         protected void exitbutton_OnClick(object sender, EventArgs e)
         {
             SuccessMessagePanel.Visible = false;
         }
 
-        #region Dynamic Methods
-
-
-        public void ddl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var ddl = (DropDownList)sender;
-            if (ddl.SelectedIndex > 0)
-            {
-                KompID = Convert.ToInt32(ddl.SelectedItem.Value);
-            }
-        }
-
-        public void rbl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var rbl = (RadioButtonList)sender;
-            KaID = Convert.ToInt32(rbl.SelectedItem.Value);
-            
-        } 
-        #endregion
     }
 }

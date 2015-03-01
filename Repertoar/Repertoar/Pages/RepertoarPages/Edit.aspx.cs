@@ -34,13 +34,6 @@ namespace Repertoar.Pages.RepertoarPages
                 MessagePlaceHolder.Visible = true;
                 Session.Remove("Success");
             }
-
-            if (!IsPostBack)
-            {
-               BindList();
-            }
-            // http://www.dotnetfox.com/articles/how-to-bind-data-to-radiobuttonlist-control-in-Asp-Net-using-C-Sharp-1048.aspx#sthash.yt1EPaNZ.dpuf
-
         }
 
         public Material MaterialFormView_GetSong([RouteData]int id)
@@ -62,22 +55,27 @@ namespace Repertoar.Pages.RepertoarPages
             return Service.GetCategories();
         }
 
-        public void MaterialFormView_UpdateSong(int MID)
+        public IEnumerable<Kompositör> ComposerDropDownList_GetData()
+        {
+            return Service.GetComposers();
+        }
+
+        public void MaterialFormView_UpdateSong(Material material)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var material = Service.GetSongByID(MID);
-                    if (material == null)
+                    var song = Service.GetSongByID(material.MID);
+                    if (song == null)
                     {
                         // Hittade inte låten.
                         ModelState.AddModelError(String.Empty,
-                            String.Format("Låten med id {0} hittades inte.", MID));
+                            String.Format("Låten med id {0} hittades inte.", material.MID));
                         return;
                     }
 
-                    if (TryUpdateModel(material))
+                    if (TryUpdateModel(song))
                     {
                        // Service.SaveSong(material, "TODO");
 
@@ -93,59 +91,7 @@ namespace Repertoar.Pages.RepertoarPages
             }
         }
 
-        public void MaterialListView_InsertItem(Material material)
-        {
-            if (Page.ModelState.IsValid)
-            {
-                try
-                {   //TODO
-                    material.MID = MID;
 
-                    // Service.SaveSong(material, "todo", "gojo");
-                    // Spara (rätt)meddelande och dirigera om klienten till lista med låtar.
-                    // (Meddelandet sparas i en "temporär" sessionsvariabel som kapslas 
-                    // in av en "extension method" i App_Infrastructure/PageExtensions.)
-                    // Del av designmönstret Post-Redirect-Get (PRG, http://en.wikipedia.org/wiki/Post/Redirect/Get).
-                    Page.SetTempData("SuccessMessage", Strings.Action_Song_Saved);
-                    Response.RedirectToRoute("SongDetails", new { id = MID });
-                    Context.ApplicationInstance.CompleteRequest();
-                }
-                catch (Exception)
-                {
-                    Page.ModelState.AddModelError(String.Empty, Strings.Song_Inserting_Error);
-                }
-            }
-        }
-
-
-
-
-
-
-        private void BindList()
-        {   
-
-          List<string> myinstruments = new List<string>();
-
-          myinstruments.Add("Piano");
-          myinstruments.Add("Gitarr");
-          myinstruments.Sort();
-
-          
-          //rb.DataSource = myinstruments;
-         // rb.DataBind();
-         // rb.Items.FindByValue("Piano").Selected = true; //http://stackoverflow.com/questions/5662113/set-radiobuttonlist-selected-from-codebehind
-
-           /* DataSet ds = new DataSet();
-           
-            return Service.GetInstrument(id);
-            SqlDataAdapter adp = new SqlDataAdapter(cmdstr, CreateConnection());
-            adp.Fill(ds);
-            rblInstrument.DataSource = ds;
-            rblInstrument.DataTextField = "Intrument";
-            rblInstrument.DataValueField = "id";
-            rblInstrument.DataBind();*/
-        }
 
         protected void MaterialListView_ItemDataBound(object sender, ListViewItemEventArgs e)
         {

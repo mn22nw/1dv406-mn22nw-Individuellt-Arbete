@@ -3,16 +3,75 @@
     margin:0 auto;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     padding: 0;
+    height:100%;
 }
 #page {
     width: 80%;
     margin:0 auto;
     background:#FFF;
     padding:15px 20px;
-    height:900px;
-    height:auto !important;
     min-height:900px;
+    height:100%;
+    height:auto !important;
 }
+textarea {
+    min-width: 500px;
+    min-height:100px;
+}
+
+  /* CREATE
+-----------------------------------------------------------*/
+.green {
+    background:green;
+}
+.left {
+    clear:left;
+    float:left;
+    margin-bottom:20px;
+    clear:right;
+    padding-right:20px;
+}
+.sRight {
+    padding-left:20px; 
+}
+.newName {
+    float:left;
+    padding-right:20px;
+}
+
+.title {
+    font-weight:bold;
+    font-size:1.2em;
+    float:left;
+    padding-right:20px;
+    height:80px;
+}
+.section{
+    margin:5px 0;
+    width:100%;
+    float:left;
+    min-height:50px;
+    height:auto;
+    clear:right;
+}
+.smaller {
+    height: 50px;
+}
+.section h3 {
+   display:block;
+   left:0;
+}
+input {margin-top:5px; }
+
+select {
+     margin:0;
+     padding:0;
+}
+.dropDown {
+    margin-top:5px; 
+   
+}
+
     /* SongDetails
 -----------------------------------------------------------*/
 #detailsUL {

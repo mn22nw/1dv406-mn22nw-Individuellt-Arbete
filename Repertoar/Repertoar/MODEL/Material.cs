@@ -34,8 +34,6 @@ namespace Repertoar.MODEL
         [StringLength(25)]
         public string Instrument { get; set; }
 
-        [Required(ErrorMessage = "Ett instrument måste anges")]
-        [StringLength(25)]
         public DateTime Datum { get; set; }
 
         [StringLength(1500)]

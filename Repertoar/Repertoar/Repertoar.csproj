@@ -121,7 +121,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Style.css" />
+    <Content Include="Content\Styles.css" />
     <Content Include="packages.config" />
     <Content Include="Pages\RepertoarPages\Create.aspx" />
     <Content Include="Pages\RepertoarPages\Edit.aspx" />
