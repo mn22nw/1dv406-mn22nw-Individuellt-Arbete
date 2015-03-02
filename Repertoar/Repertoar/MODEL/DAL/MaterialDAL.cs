@@ -148,13 +148,12 @@ namespace Repertoar.MODEL.DAL
             }
         }
 
-        public int InsertSong(Material material, string KompNamn)
+        public int InsertSong(Material material)
         {
             using (var conn = CreateConnection())
             {
-                //TODO try catch
-              /*  try
-                {*/
+                 try {
+                
                     var cmd = new SqlCommand("Repertoar_NewSong", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                    
@@ -165,33 +164,36 @@ namespace Repertoar.MODEL.DAL
                     cmd.Parameters.Add("@Genre", SqlDbType.VarChar, 20).Value = material.Genre;
                     cmd.Parameters.Add("@StatusSong", SqlDbType.VarChar, 15).Value = material.Status;
                     cmd.Parameters.Add("@Instrument", SqlDbType.VarChar, 25).Value = material.Instrument;
-                    //cmd.Parameters.AddWithValue("@Datum",DBNull.Value);
                     cmd.Parameters.Add("@Anteckning", SqlDbType.VarChar, 4000).Value = material.Anteckning;
-                    cmd.Parameters.Add("@kompNamn", SqlDbType.VarChar, 60).Value = KompNamn;
 
+                    if (material.Composer == null)
+                    {
+                        cmd.Parameters.Add("@kompNamn", SqlDbType.VarChar, 60).Value = "";
+                    }
+                    else
+                    {
+                        cmd.Parameters.Add("@kompNamn", SqlDbType.VarChar, 60).Value = material.Composer;
+                    }
+                   
+                    // cmd.Parameters.Add("@MID", DBNull.Value).Direction = ParameterDirection.Output;
 
-                   // cmd.Parameters.Add("@MID", DBNull.Value).Direction = ParameterDirection.Output;
                     conn.Open();  // ska inte vara öppen mer än vad som behövs, därför läggs den in här senare. 
 
-                    //ExecuteNonQuery används för att exekvera den lp. 
-                   // cmd.ExecuteNonQuery();
-
-                    
+                    //ExecuteScalar används för att exekvera den lp och få tillgång till primärnyckeln
                     int MID = (int)cmd.ExecuteScalar();
-
-                    return MID;
-               /* }
-
+                     return MID;
+                    }
+               
                 catch
                 {
                     throw new ApplicationException(Strings.Song_Inserting_Error);
-                }*/
+                }
             }
         }
 
         public void UpdateSong(Material material)
         {
-            using (var conn = CreateConnection())  // å
+            using (var conn = CreateConnection())  
             {
                 try
                 {
@@ -202,12 +204,20 @@ namespace Repertoar.MODEL.DAL
                     cmd.Parameters.Add("@KaID", SqlDbType.Int, 4).Value = material.KaID;
                     cmd.Parameters.Add("@KompID", SqlDbType.Int, 4).Value = material.KompID;
                     cmd.Parameters.Add("@Namn", SqlDbType.VarChar, 30).Value = material.Namn;
-                    cmd.Parameters.Add("@Svårighetsgrad", SqlDbType.TinyInt).Value = material.Level;
+                    cmd.Parameters.Add("@Svarighetsgrad", SqlDbType.TinyInt).Value = material.Level;
                     cmd.Parameters.Add("@Genre", SqlDbType.VarChar, 20).Value = material.Genre;
                     cmd.Parameters.Add("@StatusSong", SqlDbType.VarChar, 15).Value = material.Status;
-                    cmd.Parameters.Add("@Intrument", SqlDbType.VarChar, 25).Value = material.Instrument;
-                    cmd.Parameters.Add("@Datum", SqlDbType.SmallDateTime).Value = material.Datum;
+                    cmd.Parameters.Add("@Instrument", SqlDbType.VarChar, 25).Value = material.Instrument;
                     cmd.Parameters.Add("@Anteckning", SqlDbType.VarChar, 4000).Value = material.Anteckning;
+
+                    if (material.Composer == null)
+                    {
+                        cmd.Parameters.Add("@kompNamn", SqlDbType.VarChar, 60).Value = "";
+                    }
+                    else
+                    {
+                        cmd.Parameters.Add("@kompNamn", SqlDbType.VarChar, 60).Value = material.Composer;
+                    }
                     conn.Open();  
 
                     cmd.ExecuteNonQuery();

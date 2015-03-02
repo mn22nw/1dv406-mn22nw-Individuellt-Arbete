@@ -29,11 +29,9 @@ namespace Repertoar.Pages.RepertoarPages
         public int MID { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["SuccessUpdate"] as bool? == true)
-            {
-                MessagePlaceHolder.Visible = true;
-                Session.Remove("Success");
-            }
+            //Om genomförd handling lyckades av klienten och meddelande finns så visas det
+            SuccessMessageLiteral.Text = Page.GetTempData("SuccessMessage") as string;
+            SuccessMessagePanel.Visible = !String.IsNullOrWhiteSpace(SuccessMessageLiteral.Text);
         }
 
         public Material MaterialFormView_GetSong([RouteData]int id)
@@ -66,23 +64,43 @@ namespace Repertoar.Pages.RepertoarPages
             {
                 try
                 {
+                    
                     var song = Service.GetSongByID(material.MID);
                     if (song == null)
                     {
                         // Hittade inte låten.
-                        ModelState.AddModelError(String.Empty,
-                            String.Format("Låten med id {0} hittades inte.", material.MID));
+                        ModelState.AddModelError(String.Empty, String.Format("Låten med id {0} hittades inte.", material.MID));
                         return;
                     }
 
                     if (TryUpdateModel(song))
-                    {
-                       // Service.SaveSong(material, "TODO");
+                    {   
+                        //Ifall användaren har valt att lägga till ny kompositör måste kompID sättas till 0
+                       
+                        //Måste hitta controllen för att säkerhetsställa att användaren inte lämnat denna tom.
+                        TextBox kompText = (TextBox)EditFormView.Row.FindControl("KompNamn");
 
-                        Page.SetTempData("SuccessMessage", Strings.Action_Song_Updated);
-                        Response.RedirectToRoute("SongListing");
-                        Context.ApplicationInstance.CompleteRequest();
+                        if (String.IsNullOrWhiteSpace(kompText.Text))
+                        {
+                            //Om kompNamn är tomt så har användaren antingen glömt välja kompositör ur dropdownlistan eller lämnat textfältet tomt
+                            ModelState.AddModelError(String.Empty, Strings.Song_Validation_Composer);
+                        }
+                        else
+                        {
+                            //Sätter composer till det nya namn som användaren precis la till. 
+                            material.Composer = kompText.Text;
+
+                        }
+
+                        Service.SaveSong(material);
+                       
                     }
+                    //sätter meddelande till klienten
+                    Page.SetTempData("SuccessMessage", Strings.Action_Song_Updated);
+
+                    //Omdirigerar klienten till detaljerad vy över den sparade låten
+                    Response.RedirectToRoute("Details", new { id = material.MID });
+                    Context.ApplicationInstance.CompleteRequest();
                 }
                 catch (Exception)
                 {
@@ -92,10 +110,10 @@ namespace Repertoar.Pages.RepertoarPages
         }
 
 
-
+/*
         protected void MaterialListView_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
-            var label = e.Item.FindControl("ContactTypeNameLabel") as Label;
+            var label = e.Item.FindControl("KategoryNameLabel") as Label;
             if (label != null)
             {
                 // Typomvandlar e.Item.DataItem så att primärnyckelns värde kan hämtas och...
@@ -108,7 +126,21 @@ namespace Repertoar.Pages.RepertoarPages
                 // ...så att en beskrivning av kategori kan presenteras; ex: Kategori:Not
                 label.Text = String.Format(label.Text, Kategori.Namn);
             }
-        }
+
+            var label2 = e.Item.FindControl("ComposerNameLabel") as Label;
+            if (label2 != null)
+            {
+                // Typomvandlar e.Item.DataItem så att primärnyckelns värde kan hämtas och...
+                var material2 = (Material)e.Item.DataItem;
+
+                // ...som sedan kan användas för att hämta ett ("cachat") kategoriobjekt...
+                var Composer = Service.GetComposers()
+                    .Single(co => co.KompID == material2.KompID);
+
+                // ...så att en beskrivning av kategori kan presenteras; ex: Kategori:Not
+                label2.Text = String.Format(label2.Text, Composer.Namn);
+            }
+        } */
         
     }
 }

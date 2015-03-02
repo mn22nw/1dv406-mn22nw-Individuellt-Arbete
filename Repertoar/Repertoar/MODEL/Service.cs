@@ -41,7 +41,7 @@ namespace Repertoar.MODEL
         #endregion
 
         #region Material CRUD-metoder
-        public int SaveSong(Material material, string KompNamn)
+        public int SaveSong(Material material)
         {   
             int MID;
             /*  ICollection<ValidationResult> validationResults;
@@ -61,15 +61,15 @@ namespace Repertoar.MODEL
                 if (material.MID == 0) // Ny post om MID är 0!
                 {
                   
-                   MID =  MaterialDAL.InsertSong(material, KompNamn);
+                   MID =  MaterialDAL.InsertSong(material);
                    return MID;
                     
                 }
-                else //TODO - fix update!
+                else 
                 {
-                   // MID = MaterialDAL.UpdateSong(material);
-                    //return MID;
-                    return 1;
+                   MaterialDAL.UpdateSong(material);
+                   return material.MID;
+                   
                 }
 
              /*  }

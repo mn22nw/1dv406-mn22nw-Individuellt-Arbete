@@ -19,6 +19,7 @@ namespace Repertoar.Pages.RepertoarPages
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Om genomförd handling lyckades av klienten och meddelande finns så visas det
             SuccessMessageLiteral.Text = Page.GetTempData("SuccessMessage") as string;
             SuccessMessagePanel.Visible = !String.IsNullOrWhiteSpace(SuccessMessageLiteral.Text);
         }

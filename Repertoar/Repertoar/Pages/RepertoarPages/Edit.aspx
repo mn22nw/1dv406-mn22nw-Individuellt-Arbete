@@ -2,14 +2,16 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
-<asp:ValidationSummary ID="ValidationSummary1" runat="server" HeaderText="Följande fel inträffade:" 
+ <asp:Panel runat="server" ID="SuccessMessagePanel" Visible="false" CssClass="icon-ok">
+                <asp:Literal runat="server" ID="SuccessMessageLiteral" />
+            <asp:Button ID="Button1" CssClass="exit" runat="server" Text="Stäng" OnClientClick="exitbutton_OnClick" />
+            </asp:Panel>
+  
+      <asp:ValidationSummary ID="ValidationSummary1" runat="server" HeaderText="Följande fel inträffade:" 
             CssClass="validation-summary-errors"/>
-        <asp:PlaceHolder ID="MessagePlaceHolder" runat="server" Visible="false">
-            
-        </asp:PlaceHolder>
      <h1>Instrument</h1>
 
-     <asp:FormView ID="FormView1" runat="server" 
+     <asp:FormView ID="EditFormView" runat="server" 
             ItemType="Repertoar.MODEL.Material"
             DefaultMode="Edit"
             RenderOuterTable="false" 

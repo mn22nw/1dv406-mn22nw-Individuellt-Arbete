@@ -38,5 +38,12 @@ namespace Repertoar.MODEL
 
         [StringLength(1500)]
         public string Anteckning { get; set; } //NULLABLE?
+
+        
+        //When user adds their own composer
+        
+        [StringLength(60)]
+        public string Composer { get; set; }
+
     }
 }

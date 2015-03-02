@@ -25,6 +25,12 @@ namespace Repertoar.Pages.RepertoarPages
         
         public int MID { get; set; }
 
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            SuccessMessageLiteral.Text = Page.GetTempData("SuccessMessage") as string;
+            SuccessMessagePanel.Visible = !String.IsNullOrWhiteSpace(SuccessMessageLiteral.Text);
+        }
+
         public Material MaterialListView_GetItem([RouteData]int id)
         {
             try
@@ -38,7 +44,8 @@ namespace Repertoar.Pages.RepertoarPages
             }
         }
         protected void MaterialListView_ItemDataBound(object sender, ListViewItemEventArgs e)
-        {
+        {   
+
             var label = e.Item.FindControl("KategoryNameLabel") as Label;
             if (label != null)
             {
@@ -60,7 +67,7 @@ namespace Repertoar.Pages.RepertoarPages
                 var material2 = (Material)e.Item.DataItem;
 
                 // ...som sedan kan användas för att hämta ett ("cachat") kategoriobjekt...
-                var Composer = Service.GetComposers()
+                var Composer = Service.GetComposers(true)
                     .Single(co => co.KompID == material2.KompID);
 
                 // ...så att en beskrivning av kategori kan presenteras; ex: Kategori:Not

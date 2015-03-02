@@ -159,4 +159,7 @@
   <data name="Validation_Header" xml:space="preserve">
     <value>Fel inträffade. Korrigera det som är fel och försök igen.</value>
   </data>
+  <data name="Song_Validation_Composer" xml:space="preserve">
+    <value>En kompositör måste väjas ur listan eller läggas till.</value>
+  </data>
 </root>

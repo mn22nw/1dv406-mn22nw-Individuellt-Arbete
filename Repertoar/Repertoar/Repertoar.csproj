@@ -164,7 +164,7 @@
     <Content Include="Bundle.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResourses\Strings.Designer.cs">
+    <Compile Include="App_GlobalResourses\Strings1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>

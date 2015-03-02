@@ -1,6 +1,10 @@
 ﻿<%@ Page Title="Detaljer" Language="C#" MasterPageFile="~/Pages/Shared/Site.Master" AutoEventWireup="true" CodeBehind="SongDetails.aspx.cs" Inherits="Repertoar.Pages.RepertoarPages.SongDetails" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
+     <asp:Panel runat="server" ID="SuccessMessagePanel" Visible="false" CssClass="icon-ok">
+            <asp:Literal runat="server" ID="SuccessMessageLiteral" />
+            <asp:Button ID="Button1" CssClass="exit" runat="server" Text="Stäng" OnClientClick="exitbutton_OnClick" />
+       </asp:Panel>
 
     <%-- ListView som presenterar detaljer för en låt. --%>
     <asp:ListView ID="MateriaListView" runat="server"
@@ -25,9 +29,10 @@
         </EmptyDataTemplate>
 
         <ItemTemplate>
-                        <h1>
-                            <asp:Label ID="NamnLabel" runat="server" Text="<%# Item.Namn %>" />
-                        </h1>
+
+           <h1>
+               <asp:Label ID="NamnLabel" runat="server" Text="<%# Item.Namn %>" />
+           </h1>
 
             <%-- Container. --%>
             <div id="AllDetailsContainer">
@@ -71,7 +76,7 @@
              <asp:LinkButton ID="LinkButton1"  runat="server" CommandName="Delete" Text="Radera"  CssClass="button "
                              OnClientClick='<%# String.Format("return confirm(\"Ta bort låten {0}?\")", Item.Namn) %>'/>  
             <br />
-             <asp:HyperLink ID="HyperLink2" runat="server" Text="Tillbaka" 
+             <asp:HyperLink ID="HyperLink2" runat="server" Text="Tillbaka till listan" 
                            NavigateUrl="<%$ RouteUrl:routename=Default %>" CssClass="buttonBack" />
              </ItemTemplate>                 
     </asp:ListView>

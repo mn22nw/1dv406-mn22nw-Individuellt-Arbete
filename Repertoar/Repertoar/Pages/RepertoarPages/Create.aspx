@@ -7,6 +7,9 @@
                 <asp:Literal runat="server" ID="SuccessMessageLiteral" />
             <asp:Button ID="Button1" CssClass="exit" runat="server" Text="Stäng" OnClientClick="exitbutton_OnClick" />
             </asp:Panel>
+  
+      <asp:ValidationSummary ID="ValidationSummary1" runat="server" HeaderText="Följande fel inträffade:" 
+            CssClass="validation-summary-errors"/>
          
 <asp:FormView ID="SongFormView" runat="server"
     ItemType="Repertoar.MODEL.Material"
