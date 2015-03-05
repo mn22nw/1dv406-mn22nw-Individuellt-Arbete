@@ -43,40 +43,40 @@ namespace Repertoar.MODEL
         #region Material CRUD-metoder
         public int SaveSong(Material material)
         {   
-            int MID;
-            /*  ICollection<ValidationResult> validationResults;
-
-             //TODO find solution for datetime validaion + Try catch
-            if (!material.Validate(out validationResults))
-             {
-                 Debug.WriteLine("iiig");
-                 var ex = new ValidationException("Objektet klarade inte valideringen.");
-                 ex.Data.Add("ValidationResults", validationResults);
-                 Debug.WriteLine(ex.Message);
-                 throw ex;
-             }
-
             try
-            {*/
+            {
+                int MID;
+                ICollection<ValidationResult> validationResults;
+
+                //Kollar att objektet verkligen går igenom validering och kastar undatag ifall något är fel
+                if (!material.Validate(out validationResults))
+                {
+                    var ex = new ValidationException("Objektet klarade inte valideringen.");
+                    ex.Data.Add("ValidationResults", validationResults);
+                    throw ex;
+                }
+
                 if (material.MID == 0) // Ny post om MID är 0!
                 {
-                  
+                  //Lägger till en ny sång
                    MID =  MaterialDAL.InsertSong(material);
                    return MID;
                     
                 }
                 else 
-                {
+                {  
+                   //Updaterar befintlig sång
                    MaterialDAL.UpdateSong(material);
                    return material.MID;
                    
                 }
 
-             /*  }
-            catch 
+             }
+            
+            catch (Exception ex)
             {
-                throw new ApplicationException(Strings.Song_Inserting_Error_IU);
-            }*/
+                throw new ApplicationException(ex.Message); //TODO ändra detta!
+            }
         }
         public void DeleteSong(int MID)
         {
@@ -94,7 +94,7 @@ namespace Repertoar.MODEL
 
         }
         #endregion
-        #region Kategory (C)R(UD)-metoder
+        #region Kategori (C)R(UD)-metoder
 
         /// <summary>
         /// Hämtar alla kategorier.
@@ -121,6 +121,7 @@ namespace Repertoar.MODEL
         }
 
         #endregion
+
         #region Kompositör (C)R(UD)-metoder
 
         public IEnumerable<Kompositör> GetComposers(bool refresh = false)
@@ -143,6 +144,5 @@ namespace Repertoar.MODEL
         }
 
         #endregion
-        
     }
 }

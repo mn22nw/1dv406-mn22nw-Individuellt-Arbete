@@ -97,6 +97,15 @@ namespace Repertoar.App_GlobalResourses {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Det gick inte att hämta ut kompositör från databasen..
+        /// </summary>
+        internal static string DataBase_Composer_Error {
+            get {
+                return ResourceManager.GetString("DataBase_Composer_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ett oväntat fel inträffade när låten skulle tas bort..
         /// </summary>
         internal static string Song_Deleting_Error {
@@ -174,15 +183,6 @@ namespace Repertoar.App_GlobalResourses {
         internal static string Song_Value_Required {
             get {
                 return ResourceManager.GetString("Song_Value_Required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to sds.
-        /// </summary>
-        internal static string stringa {
-            get {
-                return ResourceManager.GetString("stringa", resourceCulture);
             }
         }
         

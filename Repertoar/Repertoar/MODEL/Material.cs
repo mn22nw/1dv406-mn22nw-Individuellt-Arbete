@@ -12,8 +12,9 @@ namespace Repertoar.MODEL
 
         [Required(ErrorMessage = "En kategori måste anges")]
         public int KaID { get; set; }
-
-        public int KompID { get; set; } //NULLABLE
+       
+        [Required(ErrorMessage = "En kompositör måste väljas i listan")]
+        public int KompID { get; set; } 
 
         [Required(ErrorMessage = "Ett namn måste anges")]
         [StringLength(100)]

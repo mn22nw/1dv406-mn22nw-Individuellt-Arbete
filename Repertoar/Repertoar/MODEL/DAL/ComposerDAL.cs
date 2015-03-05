@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repertoar.App_GlobalResourses;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -14,8 +15,8 @@ namespace Repertoar.MODEL.DAL
             // Skapar ett anslutningsobjekt.
             using (var conn = CreateConnection())
             {
-               // try
-              //  {   // Skapar och initierar ett SqlCommand-objekt som används till att 
+               try
+                {   // Skapar och initierar ett SqlCommand-objekt som används till att 
                     // exekveras specifierad lagrad procedur.
                     var cmd = new SqlCommand("Repertoar_GetComposers", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -51,12 +52,12 @@ namespace Repertoar.MODEL.DAL
 
                     // Returnerar referensen till List-objektet med referenser med ContactType-objekt.
                     return composers;
-              /*  }
+               }
                 catch(Exception)
                 {
-                    // Kastar ett eget undantag om ett undantag kastas.
-                    throw new ApplicationException("Det gick inte att hämta ut kategori från databasen");
-                }*/
+                    // Kastar ett eget undantag om det går fel
+                    throw new ApplicationException(Strings.DataBase_Composer_Error);
+                }
             }
         }
     }

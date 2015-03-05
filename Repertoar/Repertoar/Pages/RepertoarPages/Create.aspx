@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
    <h1>Lägg till ny låt</h1>
-    <hr />
+   <hr />
              <asp:Panel runat="server" ID="SuccessMessagePanel" Visible="false" CssClass="icon-ok">
                 <asp:Literal runat="server" ID="SuccessMessageLiteral" />
             <asp:Button ID="Button1" CssClass="exit" runat="server" Text="Stäng" OnClientClick="exitbutton_OnClick" />
@@ -26,7 +26,7 @@
                     <span class="title">Namn:</span>
                         <asp:TextBox ID="Namn" runat="server" Text='<%# BindItem.Namn %>'  MaxLength="100" Width="350px" />  
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                            ErrorMessage="Ett låtnamn måste anges." ControlToValidate="Namn" Display="Dynamic" SetFocusOnError="true"></asp:RequiredFieldValidator>
+                            ErrorMessage="Ett låtnamn måste anges." ControlToValidate="Namn" Display="Dynamic" SetFocusOnError="true" Text="*"></asp:RequiredFieldValidator>
                 </div>
 
              <%-- Instrument --%>   
@@ -47,7 +47,7 @@
                           <asp:ListItem Text="Trummor" Value="Trummor"></asp:ListItem> 
                           <asp:ListItem Text="Tuba" Value="Tuba"></asp:ListItem>  
                           <asp:ListItem Text="Valthorn" Value="Valthorn"></asp:ListItem>
-                          </asp:DropDownList> 
+                    </asp:DropDownList> 
                   </div>
                 </div>
          <%-- Status --%>  
@@ -90,7 +90,6 @@
                     <%-- Lägg till ny kompositör --%>
                     <div class="sRight">
                           <span class="newName">eller lägg till ny kompositör:</span> 
-
                           <asp:TextBox ID="KompNamn" runat="server" Text=""  MaxLength="60" />   
                     </div>
             </div>

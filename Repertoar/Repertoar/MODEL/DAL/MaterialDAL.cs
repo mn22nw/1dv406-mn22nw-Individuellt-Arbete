@@ -15,6 +15,97 @@ namespace Repertoar.MODEL.DAL
 {
     public class MaterialDAL : DALBase
     {
+        #region INSERT
+        public int InsertSong(Material material)
+        {
+            using (var conn = CreateConnection())
+            {
+                try
+                {
+
+                    var cmd = new SqlCommand("Repertoar_NewSong", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@KaID", SqlDbType.Int, 4).Value = material.KaID;
+                    cmd.Parameters.Add("@KompID", SqlDbType.Int, 4).Value = material.KompID;
+                    cmd.Parameters.Add("@Namn", SqlDbType.VarChar, 100).Value = material.Namn;
+                    cmd.Parameters.Add("@Svarighetsgrad", SqlDbType.TinyInt).Value = material.Level;
+                    cmd.Parameters.Add("@Genre", SqlDbType.VarChar, 20).Value = material.Genre;
+                    cmd.Parameters.Add("@StatusSong", SqlDbType.VarChar, 15).Value = material.Status;
+                    cmd.Parameters.Add("@Instrument", SqlDbType.VarChar, 25).Value = material.Instrument;
+
+                    if (material.Anteckning == null)
+                    {
+                        material.Anteckning = "";
+
+                    }
+
+                    cmd.Parameters.Add("@Anteckning", SqlDbType.VarChar, 4000).Value = material.Anteckning;
+
+                    if (material.Composer == null)
+                    {
+                        material.Composer = "";
+                    }
+
+                    cmd.Parameters.Add("@kompNamn", SqlDbType.VarChar, 60).Value = material.Composer;
+
+
+                    // cmd.Parameters.Add("@MID", DBNull.Value).Direction = ParameterDirection.Output;
+
+                    conn.Open();  // ska inte vara öppen mer än vad som behövs, därför läggs den in här senare. 
+
+                    //ExecuteScalar används för att exekvera den lp och få tillgång till primärnyckeln
+                    int MID = (int)cmd.ExecuteScalar();
+                    return MID;
+                }
+
+                catch (Exception ex)
+                {
+                    throw new ApplicationException(Strings.Song_Inserting_Error);
+                }
+            }
+        }
+        #endregion
+        #region UPDATE
+        public void UpdateSong(Material material)
+        {
+            using (var conn = CreateConnection())
+            {
+                try
+                {
+                    var cmd = new SqlCommand("Repertoar_UpdateSong", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@MID", SqlDbType.Int, 4).Value = material.MID;
+                    cmd.Parameters.Add("@KaID", SqlDbType.Int, 4).Value = material.KaID;
+                    cmd.Parameters.Add("@KompID", SqlDbType.Int, 4).Value = material.KompID;
+                    cmd.Parameters.Add("@Namn", SqlDbType.VarChar, 30).Value = material.Namn;
+                    cmd.Parameters.Add("@Svarighetsgrad", SqlDbType.TinyInt).Value = material.Level;
+                    cmd.Parameters.Add("@Genre", SqlDbType.VarChar, 20).Value = material.Genre;
+                    cmd.Parameters.Add("@StatusSong", SqlDbType.VarChar, 15).Value = material.Status;
+                    cmd.Parameters.Add("@Instrument", SqlDbType.VarChar, 25).Value = material.Instrument;
+                    cmd.Parameters.Add("@Anteckning", SqlDbType.VarChar, 4000).Value = material.Anteckning;
+
+                    if (material.Composer == null)
+                    {
+                        cmd.Parameters.Add("@kompNamn", SqlDbType.VarChar, 60).Value = "";
+                    }
+                    else
+                    {
+                        cmd.Parameters.Add("@kompNamn", SqlDbType.VarChar, 60).Value = material.Composer;
+                    }
+                    conn.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                catch
+                {
+                    throw new ApplicationException(Strings.Song_Inserting_Error_U);
+                }
+            }
+        }
+        #endregion
         public void DeleteSong(int MID)
         {
             using (var conn = CreateConnection())
@@ -95,10 +186,10 @@ namespace Repertoar.MODEL.DAL
 
         public IEnumerable<Material> GetSongs()
         {
-            using (var conn = CreateConnection())  // å
+            using (var conn = CreateConnection())  
             {
-                //  try
-                //{
+              try
+                {
                 var materials = new List<Material>(100);   // Object som håller ordning på de objekt som ska instansieras
 
                 var cmd = new SqlCommand("Repertoar_GetSongs", conn);
@@ -140,93 +231,11 @@ namespace Repertoar.MODEL.DAL
                 }
                 return materials;
 
-                /*  }
+                }
                   catch
                   {
-                      throw new ApplicationException("Det gick inte att hämta ut kontakterna från databasen");
-                  }*/
-            }
-        }
-
-        public int InsertSong(Material material)
-        {
-            using (var conn = CreateConnection())
-            {
-                 try {
-                
-                    var cmd = new SqlCommand("Repertoar_NewSong", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                   
-                    cmd.Parameters.Add("@KaID", SqlDbType.Int, 4).Value = material.KaID;
-                    cmd.Parameters.Add("@KompID", SqlDbType.Int, 4).Value = material.KompID;
-                    cmd.Parameters.Add("@Namn", SqlDbType.VarChar, 100).Value = material.Namn;
-                    cmd.Parameters.Add("@Svarighetsgrad", SqlDbType.TinyInt).Value = material.Level;
-                    cmd.Parameters.Add("@Genre", SqlDbType.VarChar, 20).Value = material.Genre;
-                    cmd.Parameters.Add("@StatusSong", SqlDbType.VarChar, 15).Value = material.Status;
-                    cmd.Parameters.Add("@Instrument", SqlDbType.VarChar, 25).Value = material.Instrument;
-                    cmd.Parameters.Add("@Anteckning", SqlDbType.VarChar, 4000).Value = material.Anteckning;
-
-                    if (material.Composer == null)
-                    {
-                        cmd.Parameters.Add("@kompNamn", SqlDbType.VarChar, 60).Value = "";
-                    }
-                    else
-                    {
-                        cmd.Parameters.Add("@kompNamn", SqlDbType.VarChar, 60).Value = material.Composer;
-                    }
-                   
-                    // cmd.Parameters.Add("@MID", DBNull.Value).Direction = ParameterDirection.Output;
-
-                    conn.Open();  // ska inte vara öppen mer än vad som behövs, därför läggs den in här senare. 
-
-                    //ExecuteScalar används för att exekvera den lp och få tillgång till primärnyckeln
-                    int MID = (int)cmd.ExecuteScalar();
-                     return MID;
-                    }
-               
-                catch
-                {
-                    throw new ApplicationException(Strings.Song_Inserting_Error);
-                }
-            }
-        }
-
-        public void UpdateSong(Material material)
-        {
-            using (var conn = CreateConnection())  
-            {
-                try
-                {
-                    var cmd = new SqlCommand("Repertoar_UpdateSong", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.Add("@MID", SqlDbType.Int, 4).Value = material.MID;
-                    cmd.Parameters.Add("@KaID", SqlDbType.Int, 4).Value = material.KaID;
-                    cmd.Parameters.Add("@KompID", SqlDbType.Int, 4).Value = material.KompID;
-                    cmd.Parameters.Add("@Namn", SqlDbType.VarChar, 30).Value = material.Namn;
-                    cmd.Parameters.Add("@Svarighetsgrad", SqlDbType.TinyInt).Value = material.Level;
-                    cmd.Parameters.Add("@Genre", SqlDbType.VarChar, 20).Value = material.Genre;
-                    cmd.Parameters.Add("@StatusSong", SqlDbType.VarChar, 15).Value = material.Status;
-                    cmd.Parameters.Add("@Instrument", SqlDbType.VarChar, 25).Value = material.Instrument;
-                    cmd.Parameters.Add("@Anteckning", SqlDbType.VarChar, 4000).Value = material.Anteckning;
-
-                    if (material.Composer == null)
-                    {
-                        cmd.Parameters.Add("@kompNamn", SqlDbType.VarChar, 60).Value = "";
-                    }
-                    else
-                    {
-                        cmd.Parameters.Add("@kompNamn", SqlDbType.VarChar, 60).Value = material.Composer;
-                    }
-                    conn.Open();  
-
-                    cmd.ExecuteNonQuery();
-                }
-
-                catch
-                {
-                    throw new ApplicationException(Strings.Song_Inserting_Error_U);
-                }
+                      throw new ApplicationException("Det gick inte att hämta ut låtarna från databasen");
+                  }
             }
         }
     }

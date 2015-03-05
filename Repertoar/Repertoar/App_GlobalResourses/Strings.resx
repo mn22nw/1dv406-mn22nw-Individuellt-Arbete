@@ -153,13 +153,13 @@
   <data name="Song_Value_Required" xml:space="preserve">
     <value>Låtnamn måste anges.</value>
   </data>
-  <data name="stringa" xml:space="preserve">
-    <value>sds</value>
-  </data>
   <data name="Validation_Header" xml:space="preserve">
     <value>Fel inträffade. Korrigera det som är fel och försök igen.</value>
   </data>
   <data name="Song_Validation_Composer" xml:space="preserve">
     <value>En kompositör måste väjas ur listan eller läggas till.</value>
+  </data>
+  <data name="DataBase_Composer_Error" xml:space="preserve">
+    <value>Det gick inte att hämta ut kompositör från databasen.</value>
   </data>
 </root>
