@@ -60,6 +60,31 @@ namespace Repertoar.MODEL.DAL
                 }
             }
         }
+        public void DeleteComposer(int KompID)
+        {
+            
+            using (var conn = CreateConnection())
+            {
+                try
+                {
+
+                    var cmd = new SqlCommand("Repertoar_DeleteComposer", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@KompID", SqlDbType.Int, 4).Value = KompID;
+
+                    conn.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                }
+
+                catch
+                {
+                    throw new ApplicationException(Strings.Song_Deleting_Error);
+                }
+            }
+        }
     }
 }
    

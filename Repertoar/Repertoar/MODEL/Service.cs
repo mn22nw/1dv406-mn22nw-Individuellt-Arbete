@@ -75,12 +75,36 @@ namespace Repertoar.MODEL
             
             catch (Exception ex)
             {
-                throw new ApplicationException(ex.Message); //TODO ändra detta!
+                throw new ApplicationException(ex.Message); 
             }
         }
-        public void DeleteSong(int MID)
+        public void DeleteSong(Material material)
         {
-            MaterialDAL.DeleteSong(MID);
+            try {
+                   //Kollar hur många låtar som har samma kompositör som låten användaren har valt att ta bort
+                    var songs = GetSongs();
+                    var i = 0;
+                    foreach (Material song in songs)
+                    {
+                        if (song.KompID == material.KompID)
+                        {
+                            i++;
+                        }
+                    }
+                    //Ta bort låten (detta måste göras innan kompositör eventuellt tas bort)
+                    MaterialDAL.DeleteSong(material.MID);
+
+                    //Ifall det bara finns en låt som har kompositören, så ska även kompositören tas bort från databasen
+                    if (i <= 1)
+                    {
+                        ComposerDAL.DeleteComposer(material.KompID);
+                    }
+              }
+            catch (Exception ex)
+            {
+                throw new ApplicationException(ex.Message); 
+            }
+           
         }
 
         public Material GetSongByID(int MID)

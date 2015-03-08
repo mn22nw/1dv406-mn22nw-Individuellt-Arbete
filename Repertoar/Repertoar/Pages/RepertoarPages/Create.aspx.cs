@@ -31,7 +31,11 @@ namespace Repertoar.Pages.RepertoarPages
         {
             //Lägger till ett första 'ovalt' alternativ för dropdownlist (kompositör som genereras från databasen)
             DropDownList ddlComposer = (DropDownList)SongFormView.Row.FindControl("ddlComposer");
-            ddlComposer.Items.Insert(0, new ListItem("-- Välj Kompositör --", "0"));
+            if (!(ddlComposer.Items.Contains(new ListItem("-- Välj Kompositör --", "0"))))
+            {
+                ddlComposer.Items.Insert(0, new ListItem("-- Välj Kompositör --", "0"));
+            }
+
 
             //Om genomförd handling lyckades av klienten och meddelande finns så visas det
              SuccessMessageLiteral.Text = Page.GetTempData("SuccessMessage") as string;

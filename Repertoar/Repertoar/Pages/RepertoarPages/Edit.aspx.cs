@@ -25,7 +25,7 @@ namespace Repertoar.Pages.RepertoarPages
         }
         #endregion
         
-        string Instrument;
+ 
         public int MID { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -55,7 +55,7 @@ namespace Repertoar.Pages.RepertoarPages
 
         public IEnumerable<Kompositör> ComposerDropDownList_GetData()
         {
-            return Service.GetComposers();
+            return Service.GetComposers(true);
         }
 
         public void MaterialFormView_UpdateSong(Material material)
@@ -72,24 +72,17 @@ namespace Repertoar.Pages.RepertoarPages
                         ModelState.AddModelError(String.Empty, String.Format("Låten med id {0} hittades inte.", material.MID));
                         return;
                     }
-
+                   
                     if (TryUpdateModel(song))
                     {   
-                        //Ifall användaren har valt att lägga till ny kompositör måste kompID sättas till 0
-                       
-                        //Måste hitta controllen för att säkerhetsställa att användaren inte lämnat denna tom.
+                        //Kollar om användaren har valt att lägga till ny kompositör - kollar textfältet
                         TextBox kompText = (TextBox)EditFormView.Row.FindControl("KompNamn");
 
-                        if (String.IsNullOrWhiteSpace(kompText.Text))
+                        if (!String.IsNullOrWhiteSpace(kompText.Text))
                         {
-                            //Om kompNamn är tomt så har användaren antingen glömt välja kompositör ur dropdownlistan eller lämnat textfältet tomt
-                            ModelState.AddModelError(String.Empty, Strings.Song_Validation_Composer);
-                        }
-                        else
-                        {
-                            //Sätter composer till det nya namn som användaren precis la till. 
+                            //Om kompNamn är inte är tomt så har användaren valt att lägga till en ny kompositör
                             material.Composer = kompText.Text;
-
+                            material.KompID = 0;
                         }
 
                         Service.SaveSong(material);
@@ -108,39 +101,6 @@ namespace Repertoar.Pages.RepertoarPages
                 }
             }
         }
-
-
-/*
-        protected void MaterialListView_ItemDataBound(object sender, ListViewItemEventArgs e)
-        {
-            var label = e.Item.FindControl("KategoryNameLabel") as Label;
-            if (label != null)
-            {
-                // Typomvandlar e.Item.DataItem så att primärnyckelns värde kan hämtas och...
-                var material = (Material)e.Item.DataItem;
-
-                // ...som sedan kan användas för att hämta ett ("cachat") kategoriobjekt...
-                var Kategori = Service.GetCategories()
-                    .Single(ka => ka.KaID == material.KaID);
-
-                // ...så att en beskrivning av kategori kan presenteras; ex: Kategori:Not
-                label.Text = String.Format(label.Text, Kategori.Namn);
-            }
-
-            var label2 = e.Item.FindControl("ComposerNameLabel") as Label;
-            if (label2 != null)
-            {
-                // Typomvandlar e.Item.DataItem så att primärnyckelns värde kan hämtas och...
-                var material2 = (Material)e.Item.DataItem;
-
-                // ...som sedan kan användas för att hämta ett ("cachat") kategoriobjekt...
-                var Composer = Service.GetComposers()
-                    .Single(co => co.KompID == material2.KompID);
-
-                // ...så att en beskrivning av kategori kan presenteras; ex: Kategori:Not
-                label2.Text = String.Format(label2.Text, Composer.Namn);
-            }
-        } */
         
     }
 }

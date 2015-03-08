@@ -75,40 +75,12 @@ namespace Repertoar.Pages.RepertoarPages
             }
         }
 
-        public void MaterialListView_UpdateItem(int MID)
+
+        public void MaterialtListView_DeleteSong(Material material)
         {
             try
             {
-                var material = Service.GetSongByID(MID);
-                if (material == null)
-                {
-                    // Hittade inte kontaktuppgiften.
-                    Page.ModelState.AddModelError(String.Empty,
-                        String.Format(Strings.Song_Not_Found, MID));
-                    return;
-                }
-
-                if (TryUpdateModel(material))
-                {  //TODO kolla om de behövs
-                 //   Service.SaveSong(material, "TODO");
-
-                    Page.SetTempData("SuccessMessage", Strings.Action_Song_Saved);
-                    Response.RedirectToRoute("SongDetails", new { id = material.MID });
-                    Context.ApplicationInstance.CompleteRequest();
-                }
-            }
-            catch (Exception)
-            {
-                Page.ModelState.AddModelError(String.Empty, Strings.Song_Updating_Error);
-            }
-        }
-        // The id parameter name should match the DataKeyNames value set on the control
-
-        public void MaterialtListView_DeleteSong(int MID)
-        {
-            try
-            {
-                Service.DeleteSong(MID);
+                Service.DeleteSong(material);
                 Page.SetTempData("SuccessMessage", Strings.Action_Song_Deleted);
                 Response.RedirectToRoute("Default");
                 Context.ApplicationInstance.CompleteRequest();

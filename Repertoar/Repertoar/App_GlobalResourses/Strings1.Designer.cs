@@ -106,6 +106,24 @@ namespace Repertoar.App_GlobalResourses {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Det gick inte att hämta ut låten från databasen.
+        /// </summary>
+        internal static string Database_GetSong_Error {
+            get {
+                return ResourceManager.GetString("Database_GetSong_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Det gick inte att hämta ut låtarna från databasen.
+        /// </summary>
+        internal static string Database_GetSongs_Error {
+            get {
+                return ResourceManager.GetString("Database_GetSongs_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ett oväntat fel inträffade när låten skulle tas bort..
         /// </summary>
         internal static string Song_Deleting_Error {

@@ -15,6 +15,8 @@ namespace Repertoar.MODEL.DAL
 {
     public class MaterialDAL : DALBase
     {
+      
+
         #region INSERT
         public int InsertSong(Material material)
         {
@@ -22,7 +24,6 @@ namespace Repertoar.MODEL.DAL
             {
                 try
                 {
-
                     var cmd = new SqlCommand("Repertoar_NewSong", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -48,9 +49,6 @@ namespace Repertoar.MODEL.DAL
                     }
 
                     cmd.Parameters.Add("@kompNamn", SqlDbType.VarChar, 60).Value = material.Composer;
-
-
-                    // cmd.Parameters.Add("@MID", DBNull.Value).Direction = ParameterDirection.Output;
 
                     conn.Open();  // ska inte vara öppen mer än vad som behövs, därför läggs den in här senare. 
 
@@ -84,6 +82,12 @@ namespace Repertoar.MODEL.DAL
                     cmd.Parameters.Add("@Genre", SqlDbType.VarChar, 20).Value = material.Genre;
                     cmd.Parameters.Add("@StatusSong", SqlDbType.VarChar, 15).Value = material.Status;
                     cmd.Parameters.Add("@Instrument", SqlDbType.VarChar, 25).Value = material.Instrument;
+
+                    if (material.Anteckning == null)
+                    {
+                        material.Anteckning = "";
+
+                    }
                     cmd.Parameters.Add("@Anteckning", SqlDbType.VarChar, 4000).Value = material.Anteckning;
 
                     if (material.Composer == null)
@@ -102,6 +106,8 @@ namespace Repertoar.MODEL.DAL
                 catch
                 {
                     throw new ApplicationException(Strings.Song_Inserting_Error_U);
+                   // throw new ApplicationException(ex.Message); // TODO remove this
+                    
                 }
             }
         }
@@ -111,7 +117,8 @@ namespace Repertoar.MODEL.DAL
             using (var conn = CreateConnection())
             {
                 try
-                {
+                {   
+
                     var cmd = new SqlCommand("Repertoar_DeleteSong", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -179,7 +186,7 @@ namespace Repertoar.MODEL.DAL
 
                 catch (Exception )
                 {
-                    throw new ApplicationException( "Det gick inte att hämta ut låten från databasen");
+                    throw new ApplicationException(Strings.Database_GetSong_Error);
                 }
             }
         }
@@ -234,7 +241,7 @@ namespace Repertoar.MODEL.DAL
                 }
                   catch
                   {
-                      throw new ApplicationException("Det gick inte att hämta ut låtarna från databasen");
+                      throw new ApplicationException(Strings.Database_GetSongs_Error);
                   }
             }
         }

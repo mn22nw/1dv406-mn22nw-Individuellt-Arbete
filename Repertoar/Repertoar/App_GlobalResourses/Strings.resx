@@ -162,4 +162,10 @@
   <data name="DataBase_Composer_Error" xml:space="preserve">
     <value>Det gick inte att hämta ut kompositör från databasen.</value>
   </data>
+  <data name="Database_GetSongs_Error" xml:space="preserve">
+    <value>Det gick inte att hämta ut låtarna från databasen</value>
+  </data>
+  <data name="Database_GetSong_Error" xml:space="preserve">
+    <value>Det gick inte att hämta ut låten från databasen</value>
+  </data>
 </root>
