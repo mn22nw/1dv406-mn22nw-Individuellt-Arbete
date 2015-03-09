@@ -124,14 +124,8 @@ namespace Repertoar.MODEL
 
         }
         #endregion
-        #region Instrument 
 
-         public IEnumerable<Instrument> GetInstruments()  {
-               var instruments = InstrumentDAL.GetInstruments();
-               return instruments;
-           }
 
-        #endregion
          #region Instrument CRUD-metoder 
          public int SaveInstrument(Instrument instrument)
          {
@@ -151,9 +145,7 @@ namespace Repertoar.MODEL
                      //Updaterar befintlig sång
                      InstrumentDAL.UpdateInstrument(instrument);
                      return instrument.InstrumentID;
-
                  }
-
              }
 
              catch (Exception ex)
@@ -161,7 +153,41 @@ namespace Repertoar.MODEL
                  throw new ApplicationException(ex.Message);
              }
          }
-#endregion
+         public void DeleteInstrument(Instrument instrument)
+         {
+             try
+             {   // Ta först bort alla låtar som instrumentet är kopplat till
+                 var songs = GetSongs();
+                 foreach (Material song in songs)
+                 {
+                     if (song.InstrumentID == instrument.InstrumentID)
+                     {
+                         MaterialDAL.DeleteSong(song.MID);
+                     }
+                 }
+
+                 //Ta bort instrumentet 
+                 InstrumentDAL.DeleteInstrument(instrument.InstrumentID);
+
+             }
+             catch (Exception ex)
+             {
+                 throw new ApplicationException(ex.Message);
+             }
+
+         }
+
+         public IEnumerable<Instrument> GetInstruments()
+         {
+             var instruments = InstrumentDAL.GetInstruments();
+             return instruments;
+         }
+        public Instrument GetInstrumentByID(int instrumentID)
+        {
+            return InstrumentDAL.GetInstrumentById(instrumentID);
+        }
+
+        #endregion
          #region Kategori (C)R(UD)-metoder
 
          /// <summary>

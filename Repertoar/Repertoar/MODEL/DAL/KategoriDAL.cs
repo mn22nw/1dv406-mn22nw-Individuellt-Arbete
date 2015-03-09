@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repertoar.App_GlobalResourses;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,16 +9,14 @@ using System.Web;
 namespace Repertoar.MODEL.DAL
 {
     public class KategoriDAL:DALBase
-    {
-       
+    {  
         public IEnumerable<Kategori> GetCategories()  
         {
             // Skapar ett anslutningsobjekt.
             using (var conn = CreateConnection())
             {
-               // try
-              //  {   // Skapar och initierar ett SqlCommand-objekt som används till att 
-                    // exekveras specifierad lagrad procedur.
+              try
+                {   // Skapar och initierar ett SqlCommand-objekt som används till att exekvera specifierad lagrad procedur.
                     var cmd = new SqlCommand("Repertoar_GetKategories", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -52,12 +51,12 @@ namespace Repertoar.MODEL.DAL
 
                     // Returnerar referensen till List-objektet med referenser med ContactType-objekt.
                     return kategories;
-              /*  }
+                }
                 catch(Exception)
                 {
                     // Kastar ett eget undantag om ett undantag kastas.
-                    throw new ApplicationException("Det gick inte att hämta ut kategori från databasen");
-                }*/
+                    throw new ApplicationException(Strings.Database_Category_Error);
+                }
             }
         }
     }

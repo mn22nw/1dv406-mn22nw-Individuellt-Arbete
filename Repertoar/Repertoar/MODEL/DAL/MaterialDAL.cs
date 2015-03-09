@@ -151,7 +151,7 @@ namespace Repertoar.MODEL.DAL
 
                     using (var reader = cmd.ExecuteReader())
                     {
-                        var MIDIndex = reader.GetOrdinal("MID"); // ger tillbaka ett heltal där ContactId finns
+                        var MIDIndex = reader.GetOrdinal("MID"); // ger tillbaka ett heltal där MID finns
                         var KaIdIndex = reader.GetOrdinal("KaID");
                         var KompIndex = reader.GetOrdinal("KompID");
                         var NameIndex = reader.GetOrdinal("Namn");

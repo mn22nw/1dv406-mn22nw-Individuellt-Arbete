@@ -174,4 +174,19 @@
   <data name="Instrument_Updating_Error" xml:space="preserve">
     <value>Ett fel inträffade då instrumentet skulle uppdateras.</value>
   </data>
+  <data name="Action_Instrument_Updated" xml:space="preserve">
+    <value>Instrumentet uppdaterades.</value>
+  </data>
+  <data name="Database_GetInstrument_Error" xml:space="preserve">
+    <value>Det gick inte att hämta instrument från databasen.</value>
+  </data>
+  <data name="Action_Instrument_Deleted" xml:space="preserve">
+    <value>Instrumentet togs bort.</value>
+  </data>
+  <data name="Instrument_Deleting_Error" xml:space="preserve">
+    <value>Ett oväntat fel inträffade när instrumentet skulle tas bort.</value>
+  </data>
+  <data name="Database_Category_Error" xml:space="preserve">
+    <value>Det gick inte att hämta ut kategori från databasen</value>
+  </data>
 </root>

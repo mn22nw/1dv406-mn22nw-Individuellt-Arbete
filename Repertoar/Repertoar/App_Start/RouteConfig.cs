@@ -10,7 +10,7 @@ namespace Repertoar.App_Start
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.MapPageRoute("CreateInstrument", "Song/new", "~/Pages/RepertoarPages/CreateInstrument.aspx");
+            routes.MapPageRoute("CreateInstrument", "Instrument/new", "~/Pages/RepertoarPages/InstrumentCRUD.aspx");
             routes.MapPageRoute("CreateSong", "Song/new", "~/Pages/RepertoarPages/CreateSong.aspx");
             routes.MapPageRoute("SongListing", "Songs/list", "~/Pages/RepertoarPages/Listing.aspx");
             routes.MapPageRoute("EditSong", "Song/{id}/redigera", "~/Pages/RepertoarPages/Edit.aspx");

@@ -16,7 +16,7 @@
     DefaultMode="Insert"
     InsertMethod="MaterialFormView_InsertSong"
     RenderOuterTable="false" 
-    ViewStateMode="Enabled">
+    >
 
     <InsertItemTemplate>
         <br />

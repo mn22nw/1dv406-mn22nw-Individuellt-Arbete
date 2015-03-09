@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
     
     <span class="titleRepertoar">REPERTOAR</span>
-    <asp:HyperLink ID="HyperLink2"  runat="server" Text="Lägg till instrument" NavigateUrl="<%$ RouteUrl:routename=CreateInstrument %>" CssClass="button instrument " />
+    <asp:HyperLink ID="HyperLink2"  runat="server" Text="Hantera Instrument" NavigateUrl="<%$ RouteUrl:routename=CreateInstrument %>" CssClass="button instrument " />
     <asp:HyperLink ID="HyperLink1"  runat="server" Text="Skapa Ny Låt" NavigateUrl="<%$ RouteUrl:routename=CreateSong %>" CssClass="button newSong" />
         
     <hr />
@@ -13,7 +13,17 @@
             <asp:Button ID="Button1" CssClass="exit" runat="server" Text="Stäng" OnClientClick="exitbutton_OnClick" />
         <br />
             </asp:Panel>
-    
+    <asp:Panel runat="server" ID="DropdownPanel">  
+        <span class="title">Sortera efter instrument:</span>
+        <asp:DropDownList ID="ddlInstruments" runat="server" AutoPostBack="true"
+                        ItemType="Repertoar.MODEL.Instrument"
+                        SelectMethod="InstrumentList_GetData"
+                        DataTextField="Namn"
+                        DataValueField="InstrumentID"
+                        CssClass="dropDown">
+                    </asp:DropDownList> <br />
+    </asp:Panel>
+
      <asp:ListView ID="MaterialListView" runat="server" 
             ItemType="Repertoar.MODEL.Material"
             SelectMethod="MaterialListView_GetData"
@@ -21,19 +31,15 @@
              OnItemDataBound="MaterialListView_ItemDataBound"
             >
           <LayoutTemplate>
-         <table id="allContactsTable">
-                    <tr>
-                        <th>
-                        </th>
-                        <th>Instrument:
-                        </th>   
-                    </tr>
+                 <br />
+         <table id="allContactsTable"><tr></tr>
+                 
                 <%-- Platshallare för nya rader --%>
                     <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
                 </table>
               </LayoutTemplate>
-          <%-- Mall för nya rader --%>
-                   
+
+          <%-- Mall för nya rader --%>    
             <ItemTemplate>
                     <tr>
                         <td class="Name">

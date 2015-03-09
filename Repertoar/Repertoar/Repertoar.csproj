@@ -127,7 +127,7 @@
   <ItemGroup>
     <Content Include="Content\Styles.css" />
     <Content Include="packages.config" />
-    <Content Include="Pages\RepertoarPages\CreateInstrument.aspx" />
+    <Content Include="Pages\RepertoarPages\InstrumentCRUD.aspx" />
     <Content Include="Pages\RepertoarPages\CreateSong.aspx" />
     <Content Include="Pages\RepertoarPages\Edit.aspx" />
     <Content Include="Pages\RepertoarPages\Listing.aspx" />
@@ -199,12 +199,12 @@
     <Compile Include="MODEL\Kompositör.cs" />
     <Compile Include="MODEL\Material.cs" />
     <Compile Include="MODEL\Service.cs" />
-    <Compile Include="Pages\RepertoarPages\CreateInstrument.aspx.cs">
-      <DependentUpon>CreateInstrument.aspx</DependentUpon>
+    <Compile Include="Pages\RepertoarPages\InstrumentCRUD.aspx.cs">
+      <DependentUpon>InstrumentCRUD.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\RepertoarPages\CreateInstrument.aspx.designer.cs">
-      <DependentUpon>CreateInstrument.aspx</DependentUpon>
+    <Compile Include="Pages\RepertoarPages\InstrumentCRUD.aspx.designer.cs">
+      <DependentUpon>InstrumentCRUD.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\RepertoarPages\CreateSong.aspx.cs">
       <DependentUpon>CreateSong.aspx</DependentUpon>

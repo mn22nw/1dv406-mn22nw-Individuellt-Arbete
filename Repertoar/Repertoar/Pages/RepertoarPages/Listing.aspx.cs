@@ -19,6 +19,7 @@ namespace Repertoar.Pages.RepertoarPages
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             //Om genomförd handling lyckades av klienten och meddelande finns så visas det
             SuccessMessageLiteral.Text = Page.GetTempData("SuccessMessage") as string;
             SuccessMessagePanel.Visible = !String.IsNullOrWhiteSpace(SuccessMessageLiteral.Text);
@@ -30,13 +31,49 @@ namespace Repertoar.Pages.RepertoarPages
         }
 
         public IEnumerable<Material> MaterialListView_GetData()
-        {
-            return Service.GetSongs();
+        {   
+            var songs = Service.GetSongs();
+           
+            //Show all songs if dropdownlist hasn't been changed
+            DropDownList instruments = (DropDownList)DropdownPanel.FindControl("ddlInstruments");
+            ListItem li = new ListItem("-- Alla Instrument --", "0");
+            if (!(instruments.Items.Contains(li)))
+            {
+                instruments.Items.Insert(0, li);
+            }
+
+            if (!IsPostBack)
+            {
+                return songs;
+            }
+          
+            if (IsPostBack)
+            {
+                var instrumentList = Service.GetInstruments() as List<Instrument>;
+
+                instruments.SelectedValue = Request.Form[instruments.UniqueID];
+
+                //Om värdet i dropdownlistan är ändrat från 0 har användaren valt att visa ett speciellt instrument
+                if (Convert.ToInt32(instruments.SelectedValue) != 0)
+                {
+                    var songList = new List<Material>(100);
+                    //Visa bara låtar för det instrumentet användaren har valt
+                    foreach (Material material in songs)
+                    {
+                        if (material.InstrumentID == Convert.ToInt32(instruments.SelectedValue))
+                        {
+                            songList.Add(material);
+                        }
+                    }
+                    songList.TrimExcess(); // krymper till det faktiskta antalet element som är utnyttjat 
+                    return songList as IEnumerable<Material>;
+                }
+            }
+            return songs;
         }
 
         protected void MaterialListView_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
-
             var label = e.Item.FindControl("InstrumentNameLabel") as Label;
             if (label != null)
             {
@@ -51,6 +88,10 @@ namespace Repertoar.Pages.RepertoarPages
                 label.Text = String.Format(label.Text, instrument.Namn);
             }
 
+        }
+        public IEnumerable<Instrument> InstrumentList_GetData()
+        {
+            return Service.GetInstruments();
         }
     }
 }

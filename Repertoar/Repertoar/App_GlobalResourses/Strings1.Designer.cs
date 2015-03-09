@@ -70,6 +70,24 @@ namespace Repertoar.App_GlobalResourses {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Instrumentet togs bort..
+        /// </summary>
+        internal static string Action_Instrument_Deleted {
+            get {
+                return ResourceManager.GetString("Action_Instrument_Deleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instrumentet uppdaterades..
+        /// </summary>
+        internal static string Action_Instrument_Updated {
+            get {
+                return ResourceManager.GetString("Action_Instrument_Updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Låten togs bort..
         /// </summary>
         internal static string Action_Song_Deleted {
@@ -97,11 +115,29 @@ namespace Repertoar.App_GlobalResourses {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Det gick inte att hämta ut kategori från databasen.
+        /// </summary>
+        internal static string Database_Category_Error {
+            get {
+                return ResourceManager.GetString("Database_Category_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Det gick inte att hämta ut kompositör från databasen..
         /// </summary>
         internal static string DataBase_Composer_Error {
             get {
                 return ResourceManager.GetString("DataBase_Composer_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Det gick inte att hämta instrument från databasen..
+        /// </summary>
+        internal static string Database_GetInstrument_Error {
+            get {
+                return ResourceManager.GetString("Database_GetInstrument_Error", resourceCulture);
             }
         }
         
@@ -129,6 +165,15 @@ namespace Repertoar.App_GlobalResourses {
         internal static string DataBase_Instrument_Error {
             get {
                 return ResourceManager.GetString("DataBase_Instrument_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ett oväntat fel inträffade när instrumentet skulle tas bort..
+        /// </summary>
+        internal static string Instrument_Deleting_Error {
+            get {
+                return ResourceManager.GetString("Instrument_Deleting_Error", resourceCulture);
             }
         }
         

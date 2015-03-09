@@ -10,15 +10,14 @@ namespace Repertoar.MODEL.DAL
 {
     public class InstrumentDAL:DALBase
     {
-       
+        #region READ
         public IEnumerable<Instrument> GetInstruments()  
         {
             // Skapar ett anslutningsobjekt.
             using (var conn = CreateConnection())
             {
                try
-                {   // Skapar och initierar ett SqlCommand-objekt som används till att 
-                    // exekveras specifierad lagrad procedur.
+                {   // Skapar och initierar ett SqlCommand-objekt som används till att exekvera specifierad lagrad procedur.
                     var cmd = new SqlCommand("Repertoar_GetInstruments", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -62,6 +61,45 @@ namespace Repertoar.MODEL.DAL
             }
         }
 
+        public Instrument GetInstrumentById(int instrumentID)
+        {
+            using (var conn = CreateConnection())
+            {
+                try
+                {
+                    var cmd = new SqlCommand("Repertoar_GetInstrument", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@InstrumentID", SqlDbType.Int, 4).Value = instrumentID;
+
+                    conn.Open();  // ska inte vara öppen mer än vad som behövs, därför läggs den in här senare. 
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var InstrumentID = reader.GetOrdinal("InstrumentID"); 
+                        var NameIndex = reader.GetOrdinal("Namn");
+
+                        if (reader.Read())
+                        {
+                            return new Instrument
+                            {
+                                InstrumentID = reader.GetInt32(InstrumentID),
+                                Namn = reader.GetString(NameIndex)
+                            };
+                        }
+                    }
+
+                    return null;
+                }
+
+                catch (Exception)
+                {
+                    throw new ApplicationException(Strings.Database_GetInstrument_Error);
+                }
+            }
+        }
+
+        #endregion
         #region INSERT
         public int InsertInstrument(Instrument instrument)
         {
@@ -113,6 +151,32 @@ namespace Repertoar.MODEL.DAL
                     throw new ApplicationException(Strings.Instrument_Updating_Error);
                     // throw new ApplicationException(ex.Message); // TODO remove this
 
+                }
+            }
+        }
+        #endregion
+
+        #region DELETE
+        public void DeleteInstrument(int instrumentID)
+        {
+            using (var conn = CreateConnection())
+            {
+                try
+                {
+                    var cmd = new SqlCommand("Repertoar_DeleteInstrument", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@InstrumentID", SqlDbType.Int, 4).Value = instrumentID;
+
+                    conn.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                }
+
+                catch
+                {
+                    throw new ApplicationException(Strings.Instrument_Deleting_Error);
                 }
             }
         }

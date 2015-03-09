@@ -34,7 +34,6 @@ namespace Repertoar.Pages.RepertoarPages
                 ddlComposer.Items.Insert(0, new ListItem("-- Välj Kompositör --", "0"));
             }
 
-
             //Om genomförd handling lyckades av klienten och meddelande finns så visas det
              SuccessMessageLiteral.Text = Page.GetTempData("SuccessMessage") as string;
              SuccessMessagePanel.Visible = !String.IsNullOrWhiteSpace(SuccessMessageLiteral.Text);
@@ -84,11 +83,8 @@ namespace Repertoar.Pages.RepertoarPages
                 {   
                     //sätter felmeddelande till klienten
                     ModelState.AddModelError(string.Empty, ex.Message);
-                }
-
-                
-            }
-           
+                }      
+            } 
         }
 
         public IEnumerable<Material> MaterialListView_GetData()
