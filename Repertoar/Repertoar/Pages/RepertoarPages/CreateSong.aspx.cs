@@ -99,7 +99,7 @@ namespace Repertoar.Pages.RepertoarPages
 
         public IEnumerable<Kompositör> ComposerList_GetData()
         {
-            return Service.GetComposers();
+            return Service.GetComposers(true);
         }
         public IEnumerable<Instrument> InstrumentList_GetData()
         {

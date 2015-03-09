@@ -32,7 +32,7 @@
             >
           <LayoutTemplate>
                  <br />
-         <table id="allContactsTable"><tr></tr>
+         <table id="allContactsTable">
                  
                 <%-- Platshallare för nya rader --%>
                     <asp:PlaceHolder ID="itemPlaceholder" runat="server" />

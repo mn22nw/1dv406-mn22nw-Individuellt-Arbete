@@ -104,11 +104,8 @@ select {
 #AllDetailsContainer {
     border:1px solid #000;
     height:auto !important;
-    min-height:320px;  
-
-    
+    min-height:320px;    
 }
-
 
 *:focus {
     outline: 0;
@@ -133,8 +130,7 @@ select {
     background:#DAE4F0;
 }
 #allContactsTable tr:first-child {
-     border-left:0;
-     border-bottom:2px solid #000;
+     border-top:2px solid #000;
 }
 #allContactsTable {
     width:900px;

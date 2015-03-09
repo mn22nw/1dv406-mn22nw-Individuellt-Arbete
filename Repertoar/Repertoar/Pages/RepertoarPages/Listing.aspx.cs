@@ -34,9 +34,9 @@ namespace Repertoar.Pages.RepertoarPages
         {   
             var songs = Service.GetSongs();
            
-            //Show all songs if dropdownlist hasn't been changed
+            //Lägg till ett nytt värde för dropdownlistan Instrument (så att användaren kan välja att visa alla Instrument)
             DropDownList instruments = (DropDownList)DropdownPanel.FindControl("ddlInstruments");
-            ListItem li = new ListItem("-- Alla Instrument --", "0");
+            ListItem li = new ListItem("Alla Instrument", "0");
             if (!(instruments.Items.Contains(li)))
             {
                 instruments.Items.Insert(0, li);

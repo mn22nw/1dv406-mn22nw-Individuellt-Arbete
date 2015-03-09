@@ -23,7 +23,6 @@ namespace Repertoar.Pages.RepertoarPages
         }
         #endregion
         
-        public int MID { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -44,14 +43,13 @@ namespace Repertoar.Pages.RepertoarPages
             }
         }
         protected void MaterialListView_ItemDataBound(object sender, ListViewItemEventArgs e)
-        {   
-
-            var label = e.Item.FindControl("KategoryNameLabel") as Label;
+        {
+            // Typomvandlar e.Item.DataItem så att primärnyckelns värde kan hämtas och...
+            var material = (Material)e.Item.DataItem;
+            
+            var label = e.Item.FindControl("CategoryNameLabel") as Label;
             if (label != null)
             {
-                // Typomvandlar e.Item.DataItem så att primärnyckelns värde kan hämtas och...
-                var material = (Material)e.Item.DataItem;
-
                 // ...som sedan kan användas för att hämta ett ("cachat") kategoriobjekt...
                 var Kategori = Service.GetCategories()
                     .Single(ka => ka.KaID == material.KaID);
@@ -63,26 +61,19 @@ namespace Repertoar.Pages.RepertoarPages
             var label2 = e.Item.FindControl("ComposerNameLabel") as Label;
             if (label2 != null)
             {
-                // Typomvandlar e.Item.DataItem så att primärnyckelns värde kan hämtas och...
-                var material2 = (Material)e.Item.DataItem;
 
-                // ...som sedan kan användas för att hämta ett ("cachat") kategoriobjekt...
                 var Composer = Service.GetComposers(true)
-                    .Single(co => co.KompID == material2.KompID);
+                    .Single(co => co.KompID == material.KompID);
 
-                // ...så att en beskrivning av kategori kan presenteras; ex: Kategori:Not
+                // ...så att en beskrivning av kategori kan presenteras; ex: kompositör:Namn
                 label2.Text = String.Format(label2.Text, Composer.Namn);
             }
 
             var label3 = e.Item.FindControl("InstrumentNameLabel") as Label;
             if (label3 != null)
             {
-                // Typomvandlar e.Item.DataItem så att primärnyckelns värde kan hämtas och...
-                var material3 = (Material)e.Item.DataItem;
-
-                // ...som sedan kan användas för att hämta ett instrumentobjekt...
                 var instrument = Service.GetInstruments()
-                    .Single(instr => instr.InstrumentID == material3.InstrumentID);
+                    .Single(instr => instr.InstrumentID == material.InstrumentID);
 
                 // ...så att en beskrivning av instrument kan presenteras; ex: instrument:piano
                 label3.Text = String.Format(label3.Text, instrument.Namn);

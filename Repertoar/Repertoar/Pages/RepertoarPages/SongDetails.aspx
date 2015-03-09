@@ -60,7 +60,7 @@
                         </li>
                         <li>
                             <h3>Kategori:</h3>
-                            <asp:Label ID="KategoryNameLabel" runat="server" Text="{0}" /></span>
+                            <asp:Label ID="CategoryNameLabel" runat="server" Text="{0}" /></span>
                         </li> 
                         <li>
                              <h3>Instrument:</h3>
