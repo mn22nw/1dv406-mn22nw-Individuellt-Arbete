@@ -9,8 +9,7 @@
   
       <asp:ValidationSummary ID="ValidationSummary1" runat="server" HeaderText="Följande fel inträffade:" 
             CssClass="validation-summary-errors"/>
-     <h1>Instrument</h1>
-
+    <h1>Redigera uppgifter</h1>
      <asp:FormView ID="EditFormView" runat="server" 
             ItemType="Repertoar.MODEL.Material"
             DefaultMode="Edit"
@@ -33,23 +32,14 @@
              <%-- Instrument --%>   
              <div class="sRight">  
                    <span class="title">Instrument:</span>
-                   <asp:DropDownList ID="ddlInstruments" runat="server" SelectedValue='<%# BindItem.Instrument %>'
-                    CssClass="dropDown"> 
-                          <asp:ListItem Text="Bas" Value="Bas"></asp:ListItem> 
-                          <asp:ListItem Text="Fiol" Value="Fiol"></asp:ListItem>
-                          <asp:ListItem Text="Flöjt" Value="Flöjt"></asp:ListItem>
-                          <asp:ListItem Text="Gitarr" Value="Gitarr"></asp:ListItem>
-                          <asp:ListItem Text="Klarinett" Value="Klarinett"></asp:ListItem>
-                          <asp:ListItem Text="Oboe" Value="Oboe"></asp:ListItem>
-                          <asp:ListItem Text="Piano" Value="Piano" Selected="True"></asp:ListItem>
-                          <asp:ListItem Text="Saxofon" Value="Saxofon"></asp:ListItem>  
-                          <asp:ListItem Text="Trumpet" Value="Trumpet"></asp:ListItem>
-                          <asp:ListItem Text="Trombon" Value="Trombon"></asp:ListItem>  
-                          <asp:ListItem Text="Trummor" Value="Trummor"></asp:ListItem> 
-                          <asp:ListItem Text="Tuba" Value="Tuba"></asp:ListItem>  
-                          <asp:ListItem Text="Valthorn" Value="Valthorn"></asp:ListItem>
-                          </asp:DropDownList> 
-                  </div>
+                     <asp:DropDownList ID="ddlInstruments" runat="server"
+                        ItemType="Repertoar.MODEL.Instrument"
+                        SelectMethod="InstrumentList_GetData"
+                        DataTextField="Namn"
+                        DataValueField="InstrumentID"
+                        SelectedValue='<%# BindItem.InstrumentID %>'
+                        CssClass="dropDown">
+                    </asp:DropDownList> <br />
                 </div>
          <%-- Status --%>  
           <div class="section smaller"> 
@@ -66,7 +56,7 @@
                 <span class="title">Kategori:</span>
                  <asp:DropDownList ID="ddlCategory" runat="server"
                         ItemType="Repertoar.MODEL.Kategori"
-                        SelectMethod="CategoryDropDownList_GetData"
+                        SelectMethod="CategoryList_GetData"
                         DataTextField="Namn"
                         DataValueField="KaID"
                         SelectedValue='<%# BindItem.KaID %>'
@@ -80,7 +70,7 @@
             <div class="left">
                           <asp:DropDownList ID="ddlComposer" runat="server"
                             ItemType="Repertoar.MODEL.Kompositör"
-                            SelectMethod="ComposerDropDownList_GetData"
+                            SelectMethod="ComposerList_GetData"
                             DataTextField="Namn"
                             DataValueField="KompID"
                             SelectedValue='<%# BindItem.KompID %>'
@@ -137,10 +127,13 @@
             <h2>Anteckningar</h2>
              <asp:TextBox ID="TextBox2" runat="server" MaxLength="1500" Text='<%# BindItem.Anteckning %>' TextMode="MultiLine" ></asp:TextBox>
             </div>
- 
-        <asp:Button ID="SaveButton" runat="server" Text="Spara" CommandName="Update" CssClass="button save"/>
+            <div id="bottom"> 
+                <asp:Button ID="SaveButton" runat="server" Text="Spara" CommandName="Update" CssClass="button save"/>
               <asp:HyperLink ID="HyperLink1" runat="server" Text="Avbryt" 
-                            NavigateUrl='<%# GetRouteUrl("Details", new { id= Item.MID}) %>' CssClass="button" />
+                            NavigateUrl='<%# GetRouteUrl("Details", new { id= Item.MID}) %>' CssClass="button" /> 
+
+            </div>
+       
             </EditItemTemplate>
            
 

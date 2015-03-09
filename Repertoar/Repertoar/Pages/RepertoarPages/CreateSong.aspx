@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Create" Language="C#" MasterPageFile="~/Pages/Shared/Site.Master" AutoEventWireup="true" CodeBehind="Create.aspx.cs" Inherits="Repertoar.Pages.RepertoarPages.Create" ViewStateMode="Enabled" %>
+﻿<%@ Page Title="Create" Language="C#" MasterPageFile="~/Pages/Shared/Site.Master" AutoEventWireup="true" CodeBehind="CreateSong.aspx.cs" Inherits="Repertoar.Pages.RepertoarPages.CreateSong" ViewStateMode="Disabled" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
    <h1>Lägg till ny låt</h1>
@@ -32,22 +32,14 @@
              <%-- Instrument --%>   
              <div class="sRight">  
                    <span class="title">Instrument:</span>
-                   <asp:DropDownList ID="ddlInstruments" runat="server" SelectedValue='<%# BindItem.Instrument %>'
-                    CssClass="dropDown"> 
-                          <asp:ListItem Text="Bas" Value="Bas"></asp:ListItem> 
-                          <asp:ListItem Text="Fiol" Value="Fiol"></asp:ListItem>
-                          <asp:ListItem Text="Flöjt" Value="Flöjt"></asp:ListItem>
-                          <asp:ListItem Text="Gitarr" Value="Gitarr"></asp:ListItem>
-                          <asp:ListItem Text="Klarinett" Value="Klarinett"></asp:ListItem>
-                          <asp:ListItem Text="Oboe" Value="Oboe"></asp:ListItem>
-                          <asp:ListItem Text="Piano" Value="Piano" Selected="True"></asp:ListItem>
-                          <asp:ListItem Text="Saxofon" Value="Saxofon"></asp:ListItem>  
-                          <asp:ListItem Text="Trumpet" Value="Trumpet"></asp:ListItem>
-                          <asp:ListItem Text="Trombon" Value="Trombon"></asp:ListItem>  
-                          <asp:ListItem Text="Trummor" Value="Trummor"></asp:ListItem> 
-                          <asp:ListItem Text="Tuba" Value="Tuba"></asp:ListItem>  
-                          <asp:ListItem Text="Valthorn" Value="Valthorn"></asp:ListItem>
-                    </asp:DropDownList> 
+                 <asp:DropDownList ID="ddlInstruments" runat="server"
+                        ItemType="Repertoar.MODEL.Instrument"
+                        SelectMethod="InstrumentList_GetData"
+                        DataTextField="Namn"
+                        DataValueField="InstrumentID"
+                        SelectedValue='<%# BindItem.InstrumentID %>'
+                        CssClass="dropDown">
+                    </asp:DropDownList> <br />
                   </div>
                 </div>
          <%-- Status --%>  
@@ -65,7 +57,7 @@
                 <span class="title">Kategori:</span>
                  <asp:DropDownList ID="ddlCategory" runat="server"
                         ItemType="Repertoar.MODEL.Kategori"
-                        SelectMethod="CategoryDropDownList_GetData"
+                        SelectMethod="CategoryList_GetData"
                         DataTextField="Namn"
                         DataValueField="KaID"
                         SelectedValue='<%# BindItem.KaID %>'
@@ -79,7 +71,7 @@
             <div class="left">
                           <asp:DropDownList ID="ddlComposer" runat="server"
                             ItemType="Repertoar.MODEL.Kompositör"
-                            SelectMethod="ComposerDropDownList_GetData"
+                            SelectMethod="ComposerList_GetData"
                             DataTextField="Namn"
                             DataValueField="KompID"
                             SelectedValue='<%# BindItem.KompID %>'

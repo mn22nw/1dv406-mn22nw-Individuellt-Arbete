@@ -181,7 +181,11 @@ select {
     padding-right:10px;
     text-align:left;
 }
-
+#bottom {
+    display:block;
+    clear:both;
+    width:100%;
+}
 
 /****       KNAPPAR         ****
    ------------------------****/
@@ -206,6 +210,18 @@ select {
     .button:visited {
         color:#000;
     }
+.instrument {
+    color:#FFF;
+    width:150px;
+    height:40px;
+    background:#2ca7f9;
+    float:right;
+    line-height:40px;
+    font-size:0.9em;
+    margin:0 0 15px 0;
+    margin-left:20px;
+
+}
 .save {
  background:#ff9900;
  width:150px;
@@ -219,12 +235,13 @@ select {
 hr { 
     clear:both;
 }
-.right {
+.newSong {
+    color:#FFF;
     width:110px;
     height:40px;
-    line-height:40px;
     float:right;
-    background:#ff9900;
+    line-height:40px;
+    background:#2ca7f9;
     font-size:0.9em;
     margin:0 0 15px 0;
 }

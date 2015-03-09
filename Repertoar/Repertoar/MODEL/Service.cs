@@ -16,6 +16,7 @@ namespace Repertoar.MODEL
         private MaterialDAL _materialDAL;
         private KategoriDAL _kategoriDAL;
         private ComposerDAL _composerDAL;
+        private InstrumentDAL _instrumentDAL;
 
         #endregion
 
@@ -27,6 +28,11 @@ namespace Repertoar.MODEL
             // gången (lazy initialization, http://en.wikipedia.org/wiki/Lazy_initialization).
             get { return _materialDAL ?? (_materialDAL = new MaterialDAL()); }
         }
+        private InstrumentDAL InstrumentDAL
+        {
+            get { return _instrumentDAL ?? (_instrumentDAL = new InstrumentDAL()); }
+        }
+        
 
         private KategoriDAL KategoriDAL
         {
@@ -118,9 +124,47 @@ namespace Repertoar.MODEL
 
         }
         #endregion
-        #region Kategori (C)R(UD)-metoder
+        #region Instrument 
 
-        /// <summary>
+         public IEnumerable<Instrument> GetInstruments()  {
+               var instruments = InstrumentDAL.GetInstruments();
+               return instruments;
+           }
+
+        #endregion
+         #region Instrument CRUD-metoder 
+         public int SaveInstrument(Instrument instrument)
+         {
+             try
+             {
+                 int instrumentID;
+
+                 if (instrument.InstrumentID == 0) // Ny post om InstrumentID är 0!
+                 {
+                     //Lägger till en nytt instrument
+                     instrumentID = InstrumentDAL.InsertInstrument(instrument);
+                     return instrumentID;
+
+                 }
+                 else
+                 {
+                     //Updaterar befintlig sång
+                     InstrumentDAL.UpdateInstrument(instrument);
+                     return instrument.InstrumentID;
+
+                 }
+
+             }
+
+             catch (Exception ex)
+             {
+                 throw new ApplicationException(ex.Message);
+             }
+         }
+#endregion
+         #region Kategori (C)R(UD)-metoder
+
+         /// <summary>
         /// Hämtar alla kategorier.
         /// </summary>
         /// <returns>Ett List-objekt innehållande referenser till Kategori-objekt.</returns>

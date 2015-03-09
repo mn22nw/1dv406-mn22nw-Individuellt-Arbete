@@ -33,5 +33,24 @@ namespace Repertoar.Pages.RepertoarPages
         {
             return Service.GetSongs();
         }
+
+        protected void MaterialListView_ItemDataBound(object sender, ListViewItemEventArgs e)
+        {
+
+            var label = e.Item.FindControl("InstrumentNameLabel") as Label;
+            if (label != null)
+            {
+                // Typomvandlar e.Item.DataItem så att primärnyckelns värde kan hämtas och...
+                var material = (Material)e.Item.DataItem;
+
+                // ...som sedan kan användas för att hämta ett instrumentobjekt...
+                var instrument = Service.GetInstruments()
+                    .Single(instr => instr.InstrumentID == material.InstrumentID);
+
+                // ...så att en beskrivning av instrument kan presenteras; ex: instrument:piano
+                label.Text = String.Format(label.Text, instrument.Namn);
+            }
+
+        }
     }
 }

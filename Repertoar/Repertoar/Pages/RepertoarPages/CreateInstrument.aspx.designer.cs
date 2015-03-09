@@ -10,7 +10,7 @@
 namespace Repertoar.Pages.RepertoarPages {
     
     
-    public partial class Create {
+    public partial class CreateInstrument {
         
         /// <summary>
         /// SuccessMessagePanel control.
@@ -49,12 +49,12 @@ namespace Repertoar.Pages.RepertoarPages {
         protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
         
         /// <summary>
-        /// SongFormView control.
+        /// InstrumentFormView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView SongFormView;
+        protected global::System.Web.UI.WebControls.FormView InstrumentFormView;
     }
 }

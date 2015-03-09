@@ -124,6 +124,24 @@ namespace Repertoar.App_GlobalResourses {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Det gick inte att hämta ut instrumenten från databasen..
+        /// </summary>
+        internal static string DataBase_Instrument_Error {
+            get {
+                return ResourceManager.GetString("DataBase_Instrument_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ett fel inträffade då instrumentet skulle uppdateras..
+        /// </summary>
+        internal static string Instrument_Updating_Error {
+            get {
+                return ResourceManager.GetString("Instrument_Updating_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ett oväntat fel inträffade när låten skulle tas bort..
         /// </summary>
         internal static string Song_Deleting_Error {

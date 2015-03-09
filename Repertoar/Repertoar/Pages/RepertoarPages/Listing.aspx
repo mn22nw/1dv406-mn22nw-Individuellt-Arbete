@@ -4,7 +4,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
     
     <span class="titleRepertoar">REPERTOAR</span>
-        <asp:HyperLink ID="HyperLink1"  runat="server" Text="Skapa Ny Låt" NavigateUrl="<%$ RouteUrl:routename=CreateSong %>" CssClass="button right" />
+    <asp:HyperLink ID="HyperLink2"  runat="server" Text="Lägg till instrument" NavigateUrl="<%$ RouteUrl:routename=CreateInstrument %>" CssClass="button instrument " />
+    <asp:HyperLink ID="HyperLink1"  runat="server" Text="Skapa Ny Låt" NavigateUrl="<%$ RouteUrl:routename=CreateSong %>" CssClass="button newSong" />
+        
     <hr />
     <asp:Panel runat="server" ID="SuccessMessagePanel" Visible="false" CssClass="icon-ok">
                 <asp:Literal runat="server" ID="SuccessMessageLiteral" />
@@ -16,6 +18,7 @@
             ItemType="Repertoar.MODEL.Material"
             SelectMethod="MaterialListView_GetData"
             DataKeyNames="MID"
+             OnItemDataBound="MaterialListView_ItemDataBound"
             >
           <LayoutTemplate>
          <table id="allContactsTable">
@@ -37,8 +40,8 @@
                             <asp:HyperLink ID="NamnLabel" runat="server"  Text="<%# Item.Namn %>" 
                             NavigateUrl='<%# GetRouteUrl("Details", new { id= Item.MID}) %>' CssClass="song" />
                         </td>
-                         <td id="instrument">
-                            <asp:Label ID="InstrumentLabel" runat="server" Text="<%# Item.Instrument %> " />
+                         <td id="instrument">  
+                            <asp:Label ID="InstrumentNameLabel" runat="server" Text="{0}" /></span>
                         </td>
                       </tr>
             </ItemTemplate>  

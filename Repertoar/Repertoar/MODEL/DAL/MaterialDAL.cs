@@ -14,9 +14,7 @@ using Repertoar.App_GlobalResourses;
 namespace Repertoar.MODEL.DAL
 {
     public class MaterialDAL : DALBase
-    {
-      
-
+    {   
         #region INSERT
         public int InsertSong(Material material)
         {
@@ -33,7 +31,7 @@ namespace Repertoar.MODEL.DAL
                     cmd.Parameters.Add("@Svarighetsgrad", SqlDbType.TinyInt).Value = material.Level;
                     cmd.Parameters.Add("@Genre", SqlDbType.VarChar, 20).Value = material.Genre;
                     cmd.Parameters.Add("@StatusSong", SqlDbType.VarChar, 15).Value = material.Status;
-                    cmd.Parameters.Add("@Instrument", SqlDbType.VarChar, 25).Value = material.Instrument;
+                    cmd.Parameters.Add("@InstrumentID", SqlDbType.Int, 4).Value = material.InstrumentID;
 
                     if (material.Anteckning == null)
                     {
@@ -59,7 +57,8 @@ namespace Repertoar.MODEL.DAL
 
                 catch (Exception ex)
                 {
-                    throw new ApplicationException(Strings.Song_Inserting_Error);
+                    throw new ApplicationException(ex.Message);
+                  //  throw new ApplicationException(Strings.Song_Inserting_Error);
                 }
             }
         }
@@ -81,7 +80,7 @@ namespace Repertoar.MODEL.DAL
                     cmd.Parameters.Add("@Svarighetsgrad", SqlDbType.TinyInt).Value = material.Level;
                     cmd.Parameters.Add("@Genre", SqlDbType.VarChar, 20).Value = material.Genre;
                     cmd.Parameters.Add("@StatusSong", SqlDbType.VarChar, 15).Value = material.Status;
-                    cmd.Parameters.Add("@Instrument", SqlDbType.VarChar, 25).Value = material.Instrument;
+                    cmd.Parameters.Add("@InstrumentID", SqlDbType.Int, 4).Value = material.InstrumentID;
 
                     if (material.Anteckning == null)
                     {
@@ -159,7 +158,7 @@ namespace Repertoar.MODEL.DAL
                         var LevelIndex = reader.GetOrdinal("Svårighetsgrad");
                         var GenreIndex = reader.GetOrdinal("Genre");
                         var StatusIndex = reader.GetOrdinal("StatusSong");
-                        var InstrumentIndex = reader.GetOrdinal("Instrument");
+                        var InstrumentIDIndex = reader.GetOrdinal("InstrumentID");
                         var DateIndex = reader.GetOrdinal("Datum");
                         var NoteIndex = reader.GetOrdinal("Anteckning");
 
@@ -174,7 +173,7 @@ namespace Repertoar.MODEL.DAL
                                 Level = reader.GetByte(LevelIndex),
                                 Genre = reader.GetString(GenreIndex),
                                 Status = reader.GetString(StatusIndex),
-                                Instrument = reader.GetString(InstrumentIndex),
+                                InstrumentID = reader.GetInt32(InstrumentIDIndex),
                                 Datum = reader.GetDateTime(DateIndex),
                                 Anteckning = reader.GetString(NoteIndex)
                             };
@@ -213,7 +212,7 @@ namespace Repertoar.MODEL.DAL
                     var LevelIndex = reader.GetOrdinal("Svårighetsgrad");
                     var GenreIndex = reader.GetOrdinal("Genre");
                     var StatusIndex = reader.GetOrdinal("StatusSong");
-                    var InstrumentIndex = reader.GetOrdinal("Instrument");
+                    var InstrumentIDIndex = reader.GetOrdinal("InstrumentID");
                     var DateIndex = reader.GetOrdinal("Datum");
                     var NoteIndex = reader.GetOrdinal("Anteckning");
 
@@ -229,7 +228,7 @@ namespace Repertoar.MODEL.DAL
                             Level = reader.GetByte(LevelIndex),
                             Genre = reader.GetString(GenreIndex),
                             Status = reader.GetString(StatusIndex),
-                            Instrument = reader.GetString(InstrumentIndex),
+                            InstrumentID = reader.GetInt32(InstrumentIDIndex),
                             Datum = reader.GetDateTime(DateIndex),
                             Anteckning = reader.GetString(NoteIndex)
                         });

@@ -40,11 +40,15 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activities" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -123,7 +127,8 @@
   <ItemGroup>
     <Content Include="Content\Styles.css" />
     <Content Include="packages.config" />
-    <Content Include="Pages\RepertoarPages\Create.aspx" />
+    <Content Include="Pages\RepertoarPages\CreateInstrument.aspx" />
+    <Content Include="Pages\RepertoarPages\CreateSong.aspx" />
     <Content Include="Pages\RepertoarPages\Edit.aspx" />
     <Content Include="Pages\RepertoarPages\Listing.aspx" />
     <Content Include="Pages\RepertoarPages\SongDetails.aspx" />
@@ -186,18 +191,27 @@
     </Compile>
     <Compile Include="MODEL\DAL\ComposerDAL.cs" />
     <Compile Include="MODEL\DAL\DALBase.cs" />
+    <Compile Include="MODEL\DAL\InstrumentDAL.cs" />
     <Compile Include="MODEL\DAL\KategoriDAL.cs" />
     <Compile Include="MODEL\DAL\MaterialDAL.cs" />
     <Compile Include="MODEL\Kategori.cs" />
+    <Compile Include="MODEL\Instrument.cs" />
     <Compile Include="MODEL\Kompositör.cs" />
     <Compile Include="MODEL\Material.cs" />
     <Compile Include="MODEL\Service.cs" />
-    <Compile Include="Pages\RepertoarPages\Create.aspx.cs">
-      <DependentUpon>Create.aspx</DependentUpon>
+    <Compile Include="Pages\RepertoarPages\CreateInstrument.aspx.cs">
+      <DependentUpon>CreateInstrument.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\RepertoarPages\Create.aspx.designer.cs">
-      <DependentUpon>Create.aspx</DependentUpon>
+    <Compile Include="Pages\RepertoarPages\CreateInstrument.aspx.designer.cs">
+      <DependentUpon>CreateInstrument.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RepertoarPages\CreateSong.aspx.cs">
+      <DependentUpon>CreateSong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\RepertoarPages\CreateSong.aspx.designer.cs">
+      <DependentUpon>CreateSong.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\RepertoarPages\Edit.aspx.cs">
       <DependentUpon>Edit.aspx</DependentUpon>

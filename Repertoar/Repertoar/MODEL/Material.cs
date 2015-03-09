@@ -31,9 +31,8 @@ namespace Repertoar.MODEL
         [StringLength(15)]
         public string Status { get; set; }
 
-        [Required(ErrorMessage = "Ett instrument måste anges")]
-        [StringLength(25)]
-        public string Instrument { get; set; }
+        [Required(ErrorMessage = "Ett instrument måste väljas i listan")]
+        public int InstrumentID { get; set; } 
 
         public DateTime Datum { get; set; }
 

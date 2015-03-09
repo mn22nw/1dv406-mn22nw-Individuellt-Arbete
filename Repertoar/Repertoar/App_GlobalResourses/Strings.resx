@@ -168,4 +168,10 @@
   <data name="Database_GetSong_Error" xml:space="preserve">
     <value>Det gick inte att hämta ut låten från databasen</value>
   </data>
+  <data name="DataBase_Instrument_Error" xml:space="preserve">
+    <value>Det gick inte att hämta ut instrumenten från databasen.</value>
+  </data>
+  <data name="Instrument_Updating_Error" xml:space="preserve">
+    <value>Ett fel inträffade då instrumentet skulle uppdateras.</value>
+  </data>
 </root>

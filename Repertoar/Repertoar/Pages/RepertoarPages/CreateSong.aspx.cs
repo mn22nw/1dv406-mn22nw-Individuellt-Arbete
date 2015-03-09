@@ -14,7 +14,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Repertoar.Pages.RepertoarPages
 {
-    public partial class Create : System.Web.UI.Page
+    public partial class CreateSong : System.Web.UI.Page
     {
         #region Service-objekt
         private Service _service;
@@ -24,8 +24,6 @@ namespace Repertoar.Pages.RepertoarPages
         }
         #endregion
 
-        public int MID { get; set; }
-        public int KaID { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -98,16 +96,20 @@ namespace Repertoar.Pages.RepertoarPages
             return Service.GetSongs();
         }
 
-        public IEnumerable<Kategori> CategoryDropDownList_GetData()
+        public IEnumerable<Kategori> CategoryList_GetData()
         {
             return Service.GetCategories();
         }
 
-        public IEnumerable<Kompositör> ComposerDropDownList_GetData()
+        public IEnumerable<Kompositör> ComposerList_GetData()
         {
             return Service.GetComposers();
         }
-
+        public IEnumerable<Instrument> InstrumentList_GetData()
+        {
+            return Service.GetInstruments();
+        }
+        
         protected void exitbutton_OnClick(object sender, EventArgs e)
         {
             SuccessMessagePanel.Visible = false;

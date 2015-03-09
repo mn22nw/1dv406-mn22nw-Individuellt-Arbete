@@ -48,14 +48,18 @@ namespace Repertoar.Pages.RepertoarPages
         }
 
 
-        public IEnumerable<Kategori> CategoryDropDownList_GetData()
+        public IEnumerable<Kategori> CategoryList_GetData()
         {
             return Service.GetCategories();
         }
 
-        public IEnumerable<Kompositör> ComposerDropDownList_GetData()
+        public IEnumerable<Kompositör> ComposerList_GetData()
         {
             return Service.GetComposers(true);
+        }
+        public IEnumerable<Instrument> InstrumentList_GetData()
+        {
+            return Service.GetInstruments();
         }
 
         public void MaterialFormView_UpdateSong(Material material)

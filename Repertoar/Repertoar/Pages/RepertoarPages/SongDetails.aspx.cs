@@ -73,6 +73,20 @@ namespace Repertoar.Pages.RepertoarPages
                 // ...så att en beskrivning av kategori kan presenteras; ex: Kategori:Not
                 label2.Text = String.Format(label2.Text, Composer.Namn);
             }
+
+            var label3 = e.Item.FindControl("InstrumentNameLabel") as Label;
+            if (label3 != null)
+            {
+                // Typomvandlar e.Item.DataItem så att primärnyckelns värde kan hämtas och...
+                var material3 = (Material)e.Item.DataItem;
+
+                // ...som sedan kan användas för att hämta ett instrumentobjekt...
+                var instrument = Service.GetInstruments()
+                    .Single(instr => instr.InstrumentID == material3.InstrumentID);
+
+                // ...så att en beskrivning av instrument kan presenteras; ex: instrument:piano
+                label3.Text = String.Format(label3.Text, instrument.Namn);
+            }
         }
 
 

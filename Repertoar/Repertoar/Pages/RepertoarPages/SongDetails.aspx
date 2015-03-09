@@ -64,7 +64,7 @@
                         </li> 
                         <li>
                              <h3>Instrument:</h3>
-                            <asp:Label ID="InstrumentLabel" runat="server" Text="<%# Item.Instrument %> " />
+                            <asp:Label ID="InstrumentNameLabel" runat="server" Text="{0}" />
                         </li> 
                  </ul>
                </div>
